@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>自动生成100个LI-只能用定位实现（基础版）</title>
+<style>
+body{ padding:20px;}
+ul{ position:relative; padding:0; margin:0;}
+li{ list-style:none; width:100px; height:70px; background:#ff0; position:absolute;top:10px; text-align:center; padding-top:30px; line-height:36px; font-size:28px; font-weight:bolder;}
+
+</style>
+<script>
+window.onload=function(){
+	var oBtn= document.getElementsByTagName("input")[0];
+	var oUl= document.getElementsByTagName("ul")[0];
+	var aLi=document.getElementsByTagName("li");
+	var len=100;
+	var arr="";
+	var onOff=true;
+
+	oBtn.onclick=function(){
+		if(onOff)
+		{
+			for(var i=0;i<len;i++)
+			{
+				   arr+="<li>"+i+"</li>";
+			}
+			onOff=false;
+		}
+		  oUl.innerHTML=arr;
+		  for(var i=0;i<100;i++)
+		  {
+			  if(i<10)
+			  {
+				aLi[i].style.top=(0*110+10)+"px";
+                aLi[i].style.left=(i*110)+"px";
+			  }else
+			  {
+				if(i<20)
+				{
+					aLi[i].style.top=(1*110+10)+"px";
+					aLi[i].style.left=(i%10)*110+"px";
+				}else
+				   {
+					 if(i<30)
+					   {
+						 aLi[i].style.top=(2*110+10)+"px";
+						 aLi[i].style.left=(i%10)*110+"px";  
+					   }else
+					      {
+							 if(i<40)
+							 {
+							   aLi[i].style.top=(3*110+10)+"px";
+							   aLi[i].style.left=(i%10)*110+"px";  
+							 }else
+							   {
+								   if(i<50)
+								   {
+									  aLi[i].style.top=(4*110+10)+"px";
+							          aLi[i].style.left=(i%10)*110+"px";  
+								   }else
+									 {
+										 if(i<60)
+										 {
+											aLi[i].style.top=(5*110+10)+"px";
+							                aLi[i].style.left=(i%10)*110+"px";  
+										 }else
+										 {
+											 if(i<70)
+											 {
+												aLi[i].style.top=(6*110+10)+"px";
+							                    aLi[i].style.left=(i%10)*110+"px";  
+											 }else
+											    {
+													if(i<80)
+													  {
+														aLi[i].style.top=(7*110+10)+"px";
+							                            aLi[i].style.left=(i%10)*110+"px";   
+													  }else
+													  {
+														  if(i<90)
+														  {
+															 aLi[i].style.top=(8*110+10)+"px";
+							                                 aLi[i].style.left=(i%10)*110+"px"; 
+														  }else
+														  {
+															   aLi[i].style.top=(9*110+10)+"px";
+							                                   aLi[i].style.left=(i%10)*110+"px";
+														  }
+													  }
+												}
+										
+										 }
+									 }
+							   }
+						  }
+				   }
+			  }
+		  switch(i%4)
+			  {
+				  case 0:
+				  aLi[i].style.background="#f00";
+				  break;                                                 
+				  case 1:
+				  aLi[i].style.background="#00f";
+				  break;
+				  case 2:
+				  aLi[i].style.background="#ff0";
+				  break;
+				  case 3:
+				  aLi[i].style.background="#0f0";
+				  break;
+				  default:
+				  aLi[i].style.background="#0f8";
+			  }
+		  }
+	}
+}
+</script>
+</head>
+<body>
+<input type="button" value="自动生成100个LI"/>
+<ul>
+</ul>
+</body>
+</html>

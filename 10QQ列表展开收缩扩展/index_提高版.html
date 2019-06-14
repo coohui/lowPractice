@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>QQ列表展开收缩扩展</title>
+<style>
+body{ padding:100px;}
+ul,li,p,h4{ list-style:none; padding:0; margin:0; cursor:default}
+.bg{ width:279px; height:702px; background:url(images/bg.jpg) no-repeat; padding:0 2px;}
+ul{ display:none;}
+li{font-family:"微软雅黑"; font-size:15px;padding-left:12px;line-height:28px;}
+li:hover{background:#fcf0c0}
+h4{font-size:14px; font-weight:normal; font-family:"微软雅黑";padding-left:20px;background:url(images/triangle.png) 0 0 no-repeat }
+p{padding-left:28px;}
+.group:hover{ background:#e1effb;}
+.group{padding-left:12px;line-height:28px; }
+
+#list{ padding:182px 0 0 0px;}
+</style>
+<script>
+window.onload=function(){
+     var oList=document.getElementById("list");
+	 var aH4=oList.getElementsByTagName("h4");
+	 var aUl=oList.getElementsByTagName("ul");
+	 var aLi=oList.getElementsByTagName("li");
+	 
+	 for(var i=0;i<aLi.length;i++)
+	 {
+		 aLi[i].index=i;
+		 aLi[i].onclick=function(){
+			 for(var i=0;i<aLi.length;i++)
+			 {
+				 aLi[i].style.background="";
+			 }
+		 aLi[this.index].style.background="#feecaa";
+		 }
+		 
+	 }
+
+	 for(var i=0;i<aH4.length;i++)
+	 {
+		 aH4[i].index=i;
+		 aH4[i].onOff=true;
+		 aH4[i].onclick=function()
+		 {
+             if(this.onOff)
+			 {   
+			     for(var i=0;i<aH4.length;i++)
+				 {
+			      aH4[i].style.background="url(images/triangle.png) 0 0 no-repeat";
+				  aUl[i].style.display="none";
+				  aH4[i].onOff=true;
+				 }
+				  aH4[this.index].style.background="url(images/triangle2.png) -10px 8px no-repeat";
+				  aUl[this.index].style.display="block";
+				  this.onOff=false;
+				  
+			 }else{
+				  aH4[this.index].style.background="url(images/triangle.png) 0 0 no-repeat";
+				  aUl[this.index].style.display="none";
+				  this.onOff=true;
+			 }
+		 }
+	 }
+}
+</script>
+</head>
+<body>
+<div class="bg">
+    <div id="list">
+        <div class="group"><h4 onselectstart="return false" style="-moz-user-select:none;">我的好友</h4></div>
+           <ul>
+                 <li><p>会长大的幸福<p></li>
+                 <li><p>Alone<p></li>
+                 <li><p>阿伟米</p></li>
+                 <li><p>娟娟</p></li>
+            </ul>
+        <div class="group"><h4 onselectstart="return false" style="-moz-user-select:none;">我的同学</h4></div>
+            <ul>
+                 <li><p>脉动果粒橙</p></li>
+                 <li><p>深海</p></li>
+             </ul>
+        <div class="group"><h4 onselectstart="return false" style="-moz-user-select:none;">企业好友</h4></div>
+            <ul>
+                 <li><p>一念间</p></li>
+                 <li><p>自由之风</p></li>
+                 <li><p>Kai.X</p></li>
+             </ul>
+        <div class="group"><h4 onselectstart="return false" style="-moz-user-select:none;">黑名单</h4></div>
+            <ul>
+                 <li><p>李四</p></li>
+            </ul>
+    </div>
+</div>
+</body>
+</html>

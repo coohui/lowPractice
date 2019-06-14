@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>鼠标提示-必须解决所有浏览器兼容性问题</title>
+<!--[if IE 6]>
+<script src="js/pngfix.js" mce_src="js/pngfix.js"></script>
+<script type="text/javascript">DD_belatedPNG.fix('*');</script>
+<![endif]--> 
+<style>
+body{ padding:100px;}
+ul,li,p{ list-style:none; padding:0; margin:0;}
+.bg{ width:585px; height:254px; background:url(images/bg.jpg) no-repeat; padding-top:36px; padding-left:10px }
+li{ height:96px; width:84px;float:left;position:relative;}
+p{width:234px; height:146px; position:absolute; top:-128px; left:20px; display:none;background:url(images/hover.png) no-repeat;}
+.active{ width:234px; height:146px;}
+</style>
+<script>
+window.onload=function(){
+     var aLi=document.getElementsByTagName("li");
+	 var aP=document.getElementsByTagName("p");
+	 
+	 for(var i=0;i<aLi.length;i++)
+	 {
+		 aLi[i].index=i;
+		 aP[i].style.display="none";
+		 aLi[i].onmouseover=function(){
+			for(var i=0;i<aLi.length;i++)
+			{
+				aP[i].style.display="none"; 
+			}
+			aP[this.index].style.display="block"; 
+	     } 
+		 aLi[i].onmouseout=function(){
+			for(var i=0;i<aLi.length;i++)
+			{
+				aP[i].style.display="none"; 
+			}
+		 }
+	 } 
+}
+</script>
+</head>
+<body>
+<div class="bg">
+    <ul>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+        <li><p></p></li>
+    </ul>
+</div>
+</body>
+</html>

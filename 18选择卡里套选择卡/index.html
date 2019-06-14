@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>选择卡里套选择卡</title>
+<style>
+body{ padding:20px 100px; font-family:"宋体";}
+ul,li,p{ list-style:none; padding:0; margin:0;}
+img{padding:0; margin:0; border:none;}
+#outer{ width:972px; height:345px; background: url(images/bg.jpg) 0 -1px no-repeat; position:relative;}
+#sidemenu{ position:absolute; width:147px; height:332px; left:6px; top:9px;}
+#sidemenu li{ height:82px; width:147px}
+#sidemenu li img{ display:none;}
+#sidemenu .current img{ display:block;}
+#show{ width:812px; height:300px; position:absolute; right:5px; top:9px;}
+#tab{ width:814px; height:30px; position:absolute;right:4px;bottom:6px;}
+#tab ul{ display:none;}
+#tab li{ float:left;height:30px; margin-right:1px; background:#5a5a52;text-align:center;}
+#tab li:hover{background:#ef3163}
+#tab .hover{background:#ef3163}
+#tab a{ line-height:30px; font-size:13px;  color:#fff; text-decoration:none;}
+.tab1 li{ width:269px;}
+.tab2 li{ width:202px;}
+.tab3 li{ width:161px;}
+
+</style>
+<script>
+window.onload=function(){
+	var oOuter=document.getElementById("outer");
+	var oSidemenu=document.getElementById("sidemenu");
+	var aLi=oSidemenu.getElementsByTagName("li");
+	var oShow=document.getElementById("show");
+	var oTab=document.getElementById("tab");
+	var aUl=oTab.getElementsByTagName("ul");
+	var oShow=document.getElementById("show");
+	
+	for(var i=0;i<aUl.length;i++)
+	{
+		Tab(aUl[i],i);
+	}
+
+	function Tab(ul,pic)
+	{
+		var aLi2=ul.getElementsByTagName("li");
+		var oImg=oShow.getElementsByTagName("img")[0];
+		
+		for(var i=0;i<aLi.length;i++)
+		  {
+			  aLi[i].index=i;
+			  aLi[i].onmouseover=function(){
+				  for(var i=0;i<aLi.length;i++)
+				  {
+					  aLi[i].className="";
+					  aUl[i].style.display="none";
+				  }
+				  this.className="current";
+				  aUl[this.index].style.display="block";
+				  oImg.src="images/"+this.index+"/"+0+".jpg";
+				  
+			  }
+		  }
+		  
+		  for(var i=0;i<aLi2.length;i++)
+		  {
+			  aLi2[i].index=i;
+			  aLi2[i].onmouseover=function(){
+				  for(var i=0;i<aLi2.length;i++)
+				  {
+					  aLi2[i].className="";
+				  }
+				  this.className="hover";
+				  oImg.src="images/"+pic+"/"+this.index+".jpg";
+				  
+			  }
+			  
+		  }
+	}
+}
+</script>
+</head>
+<body>
+<div id="outer">
+     <div id="sidemenu">
+          <ul>
+              <li class="current"><img src="images/0.jpg"/></li>
+              <li><img src="images/1.jpg"/></li>
+              <li><img src="images/2.jpg"/></li>
+              <li><img src="images/3.jpg"/></li>
+          </ul> 
+     </div>
+     <div id="show"><a href="javascript:;"><img src="images/0/0.jpg"/></a></div>
+     <div id="tab">
+          <ul class="tab1" style="display:block">
+               <li class="hover"><a href="#">雅诗兰黛完美修护唇膏</a></li>
+               <li><a href="#">雅诗兰黛花漾唇膏</a></li>
+               <li><a href="#">倩碧卓越润肤乳</a></li>
+          </ul>
+          <ul class="tab2">
+               <li class="hover"><a href="#">肌研满150减30</a></li>
+               <li><a href="#">高性价比低单商品 2.8折起</a></li>
+               <li><a href="#">贝德玛</a></li>
+               <li><a href="#">吃出美态</a></li>
+          </ul>
+          <ul class="tab3">
+               <li class="hover"><a href="#">艾格利克</a></li>
+               <li><a href="#">dora</a></li>
+               <li><a href="#">伊米妮</a></li>
+               <li><a href="#">小熊电器</a></li>
+               <li><a href="#">贝提卡</a></li>
+          </ul>
+          <ul class="tab2">
+               <li class="hover"><a href="#">万达大歌星2小时欢唱券</a></li>
+               <li><a href="#">高丝娜寇眼霜</a></li>
+               <li><a href="#">财付通下单立减</a></li>
+               <li><a href="#">芙优润天蚕丝面膜</a></li>
+          </ul>
+     </div>
+</div>
+</body>
+</html>

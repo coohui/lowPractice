@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>随机图片滚动</title>
+<style>
+ul,li{ margin:0; padding:0; list-style:none;}
+#radomRun{ width:228px; height:220px; background:url(images/bg.jpg) no-repeat; margin:200px;}
+#radomRun ul{ position:relative;}
+#radomRun li{ position:absolute; width:100px; height:52px; overflow:hidden;}
+#radomRun img{ width:100px; height:52px; position:absolute;}
+.pic1{ top:3px; left:5px;}
+.pic2{ top:3px; left:121px;}
+.pic3{ top:57px; left:5px;}
+.pic4{ top:57px; left:121px;}
+.pic5{ top:111px; left:5px;}
+.pic6{ top:111px; left:121px;}
+.pic7{ top:165px; left:5px;}
+.pic8{ top:165px; left:121px;}
+</style>
+<script src="js/move.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	var oradomRun=document.getElementById("radomRun");
+	var aLi=oradomRun.getElementsByTagName("li");
+	var timer=null;
+	var arr=["bottom","top"];
+    randomRun();
+	function randomRun()
+	{
+		timer=setInterval(function(){
+			var num=parseInt(Math.random()*(aLi.length));
+			document.title=num;
+			for(var i=0;i<num;i++)
+			{
+			  var randomObj=Math.floor(Math.random()*(aLi.length));
+			  var randomDir=arr[Math.floor(Math.random()*(arr.length))];
+			  runTop(aLi[randomObj],randomDir);
+			}
+
+		},1000);
+	}
+
+	function runTop(obj,dir){
+	   var aImg=obj.getElementsByTagName("img");
+	   var oneHeight=parseInt(aImg[0].offsetHeight);
+	   var iNow=Math.floor(Math.random()*(aImg.length));
+	   
+	   if(dir=="bottom")
+	   {
+		   if(iNow==0)
+		   {
+			  aImg[aImg.length-1].style.top=-oneHeight+"px";
+              startMove(aImg[0],{top:oneHeight});
+			  startMove(aImg[aImg.length-1],{top:0});
+		   }else{
+			  aImg[iNow-1].style.top=-oneHeight+"px";
+			  startMove(aImg[iNow],{top:oneHeight});
+			  startMove(aImg[iNow-1],{top:0});
+		   }
+	   }else
+	   {
+		   if(iNow==aImg.length-1)
+		   {
+			  aImg[0].style.top=oneHeight+"px";
+              startMove(aImg[aImg.length-1],{top:-oneHeight});
+			  startMove(aImg[0],{top:0});   
+		   }else{
+			  aImg[iNow+1].style.top=oneHeight+"px";
+			  startMove(aImg[iNow],{top:-oneHeight});
+			  startMove(aImg[iNow+1],{top:0});
+		   }
+	   }
+	   
+	}	
+}
+</script>
+</head>
+<body>
+<div id="radomRun">
+     <ul>
+         <li class="pic1">
+             <img src="images/9.jpg"/>
+             <img src="images/1.jpg"/>
+         </li>
+         <li class="pic2">
+             <img src="images/10.jpg"/>
+             <img src="images/2.jpg"/>
+         </li>
+         <li class="pic3">
+              <img src="images/11.jpg"/>
+              <img src="images/3.jpg"/>
+         </li>
+         <li class="pic4">
+              <img src="images/12.jpg"/>
+              <img src="images/4.jpg"/>
+         </li>
+         <li class="pic5">
+              <img src="images/13.jpg"/>
+              <img src="images/5.jpg"/>
+         </li>
+         <li class="pic6">
+              <img src="images/14.jpg"/>
+              <img src="images/6.jpg"/>
+         </li>
+         <li class="pic7">
+              <img src="images/15.jpg"/>
+              <img src="images/7.jpg"/>
+         </li>
+         <li class="pic8">
+              <img src="images/16.jpg"/>
+              <img src="images/8.jpg"/>
+              <img src="images/17.jpg"/>
+         </li>
+     </ul>
+</div>
+</body>
+</html>

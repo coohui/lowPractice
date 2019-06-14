@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>QQ号码</title>
+<style>
+pre{ background:#999;}
+</style>
+</head>
+<body>
+<pre>
+请输入QQ号码：<input type="text" />
+<input type="button" value="判断" />
+<br />
+1、有没有输入<br />
+2、输入的是不是数字<br />
+3、不能有0在前面<br />
+4、不能是小数<br />
+5、输入的数字必须在5位以上、10位以内<br />
+</pre>
+<script>
+     var oText=document.getElementsByTagName("input")[0];
+	 var oButton=document.getElementsByTagName("input")[1];
+	 var oValue=a=b=c=null;
+
+	  oButton.onclick=function(){
+	  oValue=oText.value;
+	  if(oValue=="")
+	  {
+		  alert("请输入QQ号码！");
+	  }else{
+		  if(oValue.charAt(0)==0||oValue.charAt(0)=='-')
+		  {
+			  alert("号码不能以0或负号开头！");
+		  }else{
+			  if(!isNaN(oValue))
+				  {
+					  b=oValue
+					 if(parseInt(b)==b)
+					 {
+						 c=b.charAt(3)!=' '&&(b.charAt(4)!='')&&(b.charAt(10)=='');
+						 if(c)
+						 {
+							
+							alert("您输入的QQ号码："+oValue+"申请成功！"); 
+						 }else
+						 {
+							alert("请输入5位以上10位以内不含空格的数字！");  
+						 }
+					 }else
+					 {
+						 alert("请不要输入小数！"); 
+					 }
+				  }else{
+					   alert("请输入正确且不含字符串的数字！");
+				  }
+			  }
+		  }
+	 //  var d="10";
+	 // alert(!isNaN(a))
+	  }
+</script>
+</body>
+</html>

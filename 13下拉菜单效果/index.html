@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>13下拉菜单效果</title>
+<style>
+body,ul,li{ margin:0; padding:0; font-family:"微软雅黑"; font-size:15px;}
+a{ text-decoration:none;}
+a:hover{ text-decoration:underline}
+body{margin-top:20px;}
+li{ list-style:none; float:left; color:#fff; line-height:38px; padding:0 22px; text-align:center; cursor:pointer;}
+.hover{ background:#d61800;}
+#nav{margin:0 auto;width:1000px; height:74px;position:relative;}
+#slider{ background:#000; width:1000px; height:38px; }
+.slider_bg{background:#d61800; height:36px; width:1000px; display:none; }
+#nav a{ color:#fff; font-size:12px; line-height:36px; display:inline;padding:0 22px; float:left; text-align:center; cursor:pointer;}
+</style>
+<script>
+window.onload=function(){
+	 var oNav=document.getElementById("nav");
+	 var oSlider=document.getElementById("slider");
+	 var aLi=oSlider.getElementsByTagName("li");
+	 var aSlider_bg=oNav.getElementsByTagName("div");
+	 var timer=0;
+	 
+	 for(var i=0;i<aLi.length;i++)
+	 {
+		 aLi[i].index=aSlider_bg[i].index=i;
+		 aLi[i].onmouseover=aSlider_bg[i].onmouseover=function(){
+			 for(var i=0;i<aLi.length;i++)
+			 {
+				aSlider_bg[i].style.display="none";  
+				aLi[i].className="";
+			 }
+			aSlider_bg[this.index].style.display="block"; 
+			aLi[this.index].className="hover";
+			clearTimeout(timer);
+		 }
+		 aLi[i].onmouseout=aSlider_bg[i].onmouseout=function(){
+				var that=this;
+				timer=setTimeout(function(){
+				  aLi[that.index].className="";
+				  aSlider_bg[that.index].style.display='none';
+			},500);
+		 }
+	 }
+	 
+	
+}
+</script>
+</head>
+<body>
+<div id="nav">
+    <ul id="slider">
+        <li>首页</li>
+        <li>服饰</li>
+        <li>美容</li>
+        <li>偶像</li>
+        <li>乐活</li>
+        <li>男士</li>
+        <li>健康</li>
+        <li>视觉</li>
+        <li>视频</li>
+        <li>活动</li>
+        <li>专题</li>
+        <li>分享</li>
+        <li>流行</li>
+    </ul>
+    <div class=""></div>
+    <div class="slider_bg">
+                 <a href="#">流行点</a>
+                 <a href="#">秀场</a>
+                 <a href="#">搭配</a>
+                 <a href="#">街拍</a>
+                 <a href="#">配饰</a>
+                 <a href="#">一日一look</a>
+                 <a href="#">流行趋势</a>
+                 <a href="#">腕表</a>
+                 <a href="#">珠宝</a>
+     </div>
+      <div class="slider_bg">
+                 <a href="">新品试用</a>
+                 <a href="">美丽奇迹</a>
+                 <a href="">美肌榜样</a>
+                 <a href="">护肤</a>
+                 <a href="">彩妆</a>
+                 <a href="">美发</a>
+                 <a href="">美体</a>
+                 <a href="">新鲜货</a>
+                 <a href="">美妆大赏</a>
+                 <a href="">美容百科</a>
+        </div>
+        <div class="slider_bg">
+                 <a href="">做范儿</a>
+                 <a href="">最佳穿衣榜</a>
+                 <a href="">红毯礼服</a>
+                 <a href="">日装造型</a>
+                 <a href="">星妆时刻</a>
+                 <a href="">时尚圈</a>
+         </div>
+         <div class="slider_bg">
+                 <a href="">视线</a>
+                 <a href="">玩乐时光</a>
+                 <a href="">旅行</a>
+                 <a href="">吃痴哲学</a>
+                 <a href="">潮流眼</a>
+                 <a href="">时尚7日谈</a>
+         </div>
+         <div class="slider_bg">
+                 <a href="">流行点</a>
+                 <a href="">秀场</a>
+                 <a href="">搭配</a>
+                 <a href="">街拍</a>
+                 <a href="">配饰</a>
+                 <a href="">一日一look</a>
+                 <a href="">流行趋势</a>
+                 <a href="">腕表</a>
+                 <a href="">珠宝</a>
+         </div>
+         <div class="slider_bg">
+                 <a href="">流行点</a>
+                 <a href="">秀场</a>
+                 <a href="">搭配</a>
+                 <a href="">街拍</a>
+                 <a href="">配饰</a>
+                 <a href="">一日一look</a>
+                 <a href="">流行趋势</a>
+                 <a href="">腕表</a>
+                 <a href="">珠宝</a>
+         </div>
+         <div class="slider_bg">
+                 <a href="">有图有真相</a>
+                 <a href="">吐槽</a>
+                 <a href="">惊艳</a>
+                 <a href="">图片站</a>
+         </div>
+         <div class="slider_bg">
+                 <a href="">流行点</a>
+                 <a href="">秀场</a>
+                 <a href="">搭配</a>
+                 <a href="">街拍</a>
+                 <a href="">配饰</a>
+                 <a href="">一日一look</a>
+                 <a href="">流行趋势</a>
+                 <a href="">腕表</a>
+                 <a href="">珠宝</a>
+         </div>
+         <div class="slider_bg">
+                 <a href="">媒体活动</a>
+                 <a href="">品牌活动</a>
+                 <a href="">热门活动</a>
+                 <a href="">星工场</a>
+                 <a href="">品味杂志</a>
+        </div>
+        <div class="slider_bg">
+                 <a href="">流行点</a>
+                 <a href="">秀场</a>
+                 <a href="">搭配</a>
+                 <a href="">街拍</a>
+                 <a href="">配饰</a>
+                 <a href="">一日一look</a>
+                 <a href="">流行趋势</a>
+                 <a href="">腕表</a>
+                 <a href="">珠宝</a>
+         </div>
+         <div class="slider_bg">
+                 <a href="">流行点</a>
+                 <a href="">秀场</a>
+                 <a href="">搭配</a>
+                 <a href="">街拍</a>
+                 <a href="">配饰</a>
+                 <a href="">一日一look</a>
+                 <a href="">流行趋势</a>
+                 <a href="">腕表</a>
+                 <a href="">珠宝</a>
+         </div>
+         <div class=""></div>
+</div>
+</body>
+</html>

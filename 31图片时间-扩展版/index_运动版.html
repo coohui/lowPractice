@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--[if IE 6]>
+<script src="pngfix.js" mce_src="pngfix.js"></script>
+<script type="text/javascript">DD_belatedPNG.fix('*');</script>
+<![endif]--> 
+<script src="coohuiMove.js"></script>
+<style>
+body{ font-size:24px; font-weight:bold; padding:200px;}
+ul,li,img,p{ margin:0; padding:0; list-style:none; border:none; outline:none; vertical-align:middle;}
+#Clock{ position:relative; height:172px; overflow:hidden;}
+#Clock li{ position:absolute;width:122px; top:0; background:url(img/c.jpg) no-repeat;}
+#Clock span{position:absolute;width:122px; display:block; top:172px;}
+.conlon{ opacity:1; filter:alpha(opacity=100);}
+/*#show1{ clear:both;}*/
+</style>
+<title>图片时间</title>
+<script>
+window.onload=function(){
+	var oBady=document.getElementsByTagName("body")[0];
+	var oP=document.getElementById("show");
+	//var oP1=document.getElementById("show1");
+	var oClock=document.getElementById("Clock");
+	var aLi=oClock.getElementsByTagName("li");
+	var aSpan=oClock.getElementsByTagName("span");
+	var aImg=oClock.getElementsByTagName("img");
+	var hHeight=parseInt(getStyle(oClock,'height'));
+	var str='';
+	//var str1='';
+		
+	for(var i=0;i<aLi.length;i++)
+	{
+		aLi[i].style.left=i*parseInt(getStyle(aLi[0],'width'))+'px';
+		aSpan[i].style.left=i*parseInt(getStyle(aSpan[i],'width'))+'px';
+	}
+	
+    function Clock(){
+		var nextTime=new Date();
+		var Time=new Date(nextTime-1000);
+		var oYear=Time.getFullYear(Time+1);
+		var Month=Time.getMonth()+1;
+		var Day=Time.getDate();
+		var Week=Time.getDay();
+		if(Week===1){Week='星期一'}
+		if(Week===2){Week='星期二'}
+		if(Week===3){Week='星期三'}
+		if(Week===4){Week='星期四'}
+		if(Week===5){Week='星期五'}
+		if(Week===6){Week='星期六'}
+		if(Week===0){Week='星期日'}
+		var Hours=Time.getHours();
+		var Minutes=Time.getMinutes();
+		var Seconds=Time.getSeconds();
+		var nextHours=nextTime.getHours();
+		var nextMinutes=nextTime.getMinutes();
+		var nextSeconds=nextTime.getSeconds();
+		str=oYear+'年'+Month+'月'+Day+'日'+Week+toTwo(Hours)+':'+toTwo(Minutes)+':'+toTwo(Seconds);
+		oP.innerHTML=str;
+		str=toTwo(Hours)+':'+toTwo(Minutes)+':'+toTwo(Seconds)+toTwo(nextHours)+':'+toTwo(nextMinutes)+':'+toTwo(nextSeconds);
+		//str1=toTwo(nextHours)+toTwo(nextMinutes)+toTwo(nextSeconds);
+		//oP1.innerHTML=str1;
+		for(var i=0;i<aImg.length;i++)
+		 {
+			if(i!==2||i!==5||i!==10||i!==13)
+			 { 
+			    aImg[i].src='img/'+str.charAt(i)+'.JPG';
+		     }
+		 }
+		 for(var i=0;i<aLi.length;i++)
+		 {
+			 aLi[i].style.top=0+'px';
+			 aSpan[i].style.top=hHeight+'px';
+			 if(str.charAt(i)!=str.charAt(i+8))
+			 {
+				 doMove(aLi[i],'top',10,-hHeight); 
+				 doMove(aSpan[i],'top',10,0); 
+			 }
+		 }
+		 aImg[2].src='img/conlon.png'; 
+		 aImg[5].src='img/conlon.png';
+		 aImg[10].src='img/c.JPG'; 
+		 aImg[13].src='img/c.JPG';
+		 aImg[2].style.opacity=1;
+		 aImg[5].style.opacity=1;
+		// doMove(aImg[2],'opacity',12,0);
+		// doMove(aImg[5],'opacity',12,0);
+		 setTimeout(function(){
+		 doMove(aImg[2],'opacity',10,0);
+		 doMove(aImg[5],'opacity',10,0);
+		 },100);
+     }
+	 
+	Clock();
+	
+	setInterval(function(){Clock()},1000);
+	
+	function toTwo(obj){
+	   return obj<10?obj='0'+obj:obj+'';
+	}
+	
+	function getStyle(obj,attr){
+	   return  obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr];
+	}
+}
+</script>
+</head>
+<body>
+<p id="show"></p><br/>
+<ul id="Clock">
+    <li><img src="img/0.JPG"></li>
+    <li><img src="img/0.JPG"></li>
+    <li class="conlon"><img src="img/conlon.png"/></li>
+    <li><img src="img/0.JPG"></li>
+    <li><img src="img/0.JPG"></li>
+    <li class="conlon"><img src="img/conlon.png"/></li>
+    <li><img src="img/0.JPG"></li>
+    <li><img src="img/0.JPG"></li><br/>
+    <span><img src="img/0.JPG"></span> 
+    <span><img src="img/0.JPG"></span> 
+    <span><img src="img/c.JPG"></span> 
+    <span><img src="img/0.JPG"></span> 
+    <span><img src="img/0.JPG"></span> 
+    <span><img src="img/c.JPG"></span> 
+    <span><img src="img/0.JPG"></span> 
+    <span><img src="img/0.JPG"></span> 
+</ul><br/>
+<!--<p id="show1"></p><br/>-->
+</body>
+</html>

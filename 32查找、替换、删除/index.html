@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>查找、替换、删除</title>
+<style>
+body{ background:#efefe7; font-family:"微软雅黑";}
+textarea{ outline:none;}
+input{ outline:none; padding-left:10px; height:24px; line-height:24px;}
+ul,li{list-style:none; padding:0; margin:0;}
+.outer{width:620px; height:490px;margin:100px auto; position:relative; padding-top:10px;}
+#inner{ width:500px;height:250px; position:absolute; top:10px; left:0;background:#d2d2d0;font-size:14px; line-height:24px;font-family:"微软雅黑"; color:#454545;overflow-y:auto}
+#content{width:480px;height:230px;background:#fdf9f9; padding:10px;font-size:14px; line-height:24px;font-family:"微软雅黑"; color:#454545;border:none; outline:none;resize:none; position:absolute; top:10px; left:0; overflow-y:auto}
+#inner span{ background:#666; color:#fff;}
+#nav{ position:absolute; top:0px; right:20px;width:80px; height:140px;}
+#nav a{ display:block; width:80px; height:40px; margin-bottom:2px; line-height:40px; text-align:center; cursor:pointer; color:#000; background:#c0c0c0;display:none;}
+#nav a:hover{ background:#e76308; color:#FFF;}
+#nav .first{ background:#94948c;color:#FFF; display:block}
+#nav .first:hover{background:#94948c;}
+#find{ width:458px; height:126px;position:absolute; top:250px; left:0; border:12px solid #e71063; margin-top:12px; padding:12px; background:#e7e7b5; display:none; position:relative;}
+#find span{ width:33px; height:31px; display:block; position:absolute; right:0; top:0; cursor:pointer;}
+#find ul{width:464px; height:34px; border-bottom:solid 2px #e73100}
+#find li{ width:80px; height:34px; line-height:34px; text-align:center; float:left; cursor:pointer}
+#find input{float:left; margin-right:10px; height:24px; line-height:24px; margin-top:22px; display:none;}
+.active{ color:#fff;background:#e73100; font-weight:bold}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+     var oInner=document.getElementById("inner");
+	 var oContent=document.getElementById("content");
+	 var oNav=document.getElementById("nav");
+	 var aA=oNav.getElementsByTagName("a");
+	 var oFind=document.getElementById("find");
+	 var oReplace=document.getElementById("replace");
+	 var aInput=oFind.getElementsByTagName("input");
+	 var oSpan=oFind.getElementsByTagName("span")[0];
+	 var aLi=oFind.getElementsByTagName("li");
+	 var str="";
+	 var str1="";
+	 var btn=true;
+/*增加点击事件*/
+	 aA[0].onclick=function(){
+		if(btn)
+		{ 
+		  for(var i=0;i<aA.length;i++)
+		  {
+			  aA[i].style.display="block";
+		  }
+		}else
+		{
+		  for(var i=1;i<aA.length;i++)
+		  {
+			  aA[i].style.display="none";
+		  }
+		}
+		btn=!btn;
+	 }
+	 
+	 aA[1].onclick=function(){
+		 oInner.btn="Find";
+		 Show();
+		 Find();
+	 }
+	 
+	 aA[2].onclick=function(){
+		 oInner.btn="Replace";
+		 Show();
+		 oContent.style.display="block";
+		 Replace();
+	 }
+	 
+	 oSpan.onclick=function(){
+		 oFind.style.display="none";
+	 }	
+	 
+	 aLi[0].onclick=function(){
+        Find();
+	 }
+	 
+	 aLi[1].onclick=function(){
+		 oContent.style.display="block";
+         Replace();
+	 }
+	 
+	 function Show(){
+	   oFind.style.display="block";
+	   btn=!btn;
+	   for(var i=1;i<aA.length;i++)
+		{
+			aA[i].style.display="none";
+		} 
+	 }
+	 
+	 function Find(){
+		for(var i=0;i<aLi.length;i++)
+		  {
+			  aLi[i].className="";
+		  }
+		 aLi[0].className="active";
+		 aInput[0].style.display="block";
+		 aInput[1].style.display="none";
+		 aInput[2].style.display="block";
+		 aInput[3].style.display="none"; 
+	 }
+	 
+	 function Replace(){
+	    for(var i=0;i<aLi.length;i++)
+		  {
+			  aLi[i].className="";
+		  }
+		 aLi[1].className="active";
+		 aInput[0].style.display="block";
+		 aInput[1].style.display="block";
+		 aInput[2].style.display="none";
+		 aInput[3].style.display="block"; 
+	 }
+/*开始查找替换*/
+     oInner.onclick=function(){
+	    Reset();
+	 }
+	 
+	 oContent.onclick=function(event){
+	  (event || window.event).cancelBubble = true; 
+	 }
+	 
+	 aInput[2].onclick=function()
+	 {
+		  oInner.btn="Find";
+          startFind();
+	 }
+	 
+	 aInput[1].onclick=function()
+	 {
+        startFind();
+	 }
+	 
+	 aInput[3].onclick=function()
+	 {
+        startReplace();
+	 }
+	
+	function Reset(){
+	   oContent.style.display="block";
+	   oInner.style.width=500+'px';
+	   oInner.style.height=250+'px';
+	   oInner.style.padding=0+'px';
+	   if(oInner.btn=="Replace")
+	   {
+		  oContent.value=str1;
+	   }else
+	   {
+		   oContent.value=str;
+	   }
+	   oInner.innerHTML='';
+	}
+	 
+	function startFind(){
+	    if(aInput[0].value=="")
+		 {
+			alert("请输入您要查找或替换的内容！"); 
+		 }else
+		 {
+		   str=oContent.value;
+		   if((str.split(aInput[0].value).length)<2)
+		   {
+			 alert("没查找到内容（"+aInput[0].value+"）！");   
+		   }else
+		   {
+			 str1=str.split(aInput[0].value).join('<span>'+aInput[0].value+'</span>');
+			 str1=str1.split('\n').join('<br/>');
+			 str1=str1.split(' ').join('&nbsp;');
+			 oInner.innerHTML=str1;
+			 oInner.style.width=480+'px';
+			 oInner.style.height=230+'px';
+			 oInner.style.padding=10+'px';
+			 oContent.style.display="none";
+		   }
+		 }
+	}
+	
+	function startReplace(){
+		   oInner.btn="Replace";
+		   oContent.style.display="block";
+		   str=oContent.value;
+		  if(aInput[0].value=="")
+		   {
+			  alert("请输入您要查找或替换的内容！"); 
+		   }
+		   if((str.split(aInput[0].value).length)<2)
+		   {
+			  alert("没有可以替换的内容了！");   
+		   }else
+		   {
+			 str1=str.split(aInput[0].value).join(aInput[1].value);
+			 oInner.innerHTML=str1;
+			 oContent.value=str1;
+		   }
+	}
+	  
+}
+</script>
+</head>
+<body>
+<div class="outer">
+     <div id="inner"/></div>
+     <textarea id="content">
+     许多年轻人都有眼高手低的毛病，我也一样，例如，有的人认为自己编起程序来很顺手，不用查手册，说写就写，很熟练，几乎什么程序都能编出来，就认为自己对这种语言很精通了。其实对于一门语言的掌握程度是不可深测的，对于语言掌握其实是一个无止尽的过程，没有终点。编写时间的长短和编写熟练程度，仅仅是精通语言表现的一个方面。更重要的是程序员要掌握这个语言的适用范围，整体构架，语法规则、功能分类等基础理论方面的知识，并能利用这方面的知识，用最科学的方法去解决现实中各种项目的各个问题。
+     </textarea>
+     <div id="find">
+          <ul>
+               <li class="active">查找</li>
+               <li>替换</li>
+          </ul>
+          <div id="replace">
+             <input type="text" value=""/>
+             <input type="text" value=""/>
+             <input type="button" value="查找">
+             <input type="button" value="替换">
+           </div>
+           <span><img src="x.jpg"/></span>
+     </div>
+     <div id="nav">
+          <a class="first">展开</a>
+          <a>查找</a>
+          <a>替换</a>
+     </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>商品加减与统计结果</title>
+<script>
+window.onload = function () {
+	var oUl = document.getElementById('list');
+	var aLi = oUl.getElementsByTagName('li');
+	var aSpan=document.getElementById("count").getElementsByTagName("span");
+	var arr=[];//存储每个对象的件数
+	var arr2=[];//存储每个对象的总价
+	var arr3=[];//存储每个对象的单价
+	var arr4=[];//存储数量不为零的每个对象的单价
+	var Max=0;
+	
+	for ( var i=0; i<aLi.length; i++ ) {
+	    arr[i]=0;
+		arr2[i]=0;
+		arr3[i]=0;
+		arr4[i]=0;
+		fnCount (aLi[i],i,i,i,i);
+	}
+	
+	function fnCount (li,num,i,Value,inValue) {    //当前对象  当前对象件数  当前对象小计数组变量 当前对象单价数组变量 存在件数不为零数组的变量  
+		var aBtn = li.getElementsByTagName ('input');
+		var oStrong = li.getElementsByTagName ('strong')[0];
+		var oEm = li.getElementsByTagName ('em')[0];
+		var oSpan = li.getElementsByTagName ('span')[0];
+		var n = parseFloat(oStrong.innerHTML);			// '0'
+		var price = parseFloat(oEm.innerHTML);			// 12.5
+		
+		aBtn[0].onclick = function () {
+			if ( n > 0 ) {
+				n--;
+			}
+			countMax();
+		};
+		
+		aBtn[1].onclick = function () {
+			n++;
+			countMax();
+		};
+		
+		function countMax(){
+			  arr[num]=oStrong.innerHTML = n;
+			  oSpan.innerHTML =n*price + '元';
+			  arr2[i]=n*price;
+			  arr3[Value]=price;
+			  aSpan[0].innerHTML=arr[0]+arr[1]+arr[2]+arr[3]+arr[4];
+			  aSpan[1].innerHTML=arr2[0]+arr2[1]+arr2[2]+arr2[3]+arr2[4];
+			  for(var j=0;j<5;j++)
+			 {
+				 if(n!=0)
+				 {
+					 arr4[inValue]=arr3[Value];
+				 }else
+				 {
+					 arr4[inValue]=0;
+					 Max=0;
+				 }
+			 }
+			 for(var j=0;j<5;j++)
+			 {
+				arr4[j]>Max?Max=arr4[j]:Max;
+			 }
+			aSpan[2].innerHTML=Max;
+		   }
+	}
+};
+</script>
+</head>
+
+<body>
+
+<ul id="list">
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>12.5元</em>
+    小计：<span>0元</span>
+  </li>
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>10.5元</em>
+    小计：<span>0元</span>
+  </li>
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>8.5元</em>
+    小计：<span>0元</span>
+  </li>
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>8元</em>
+    小计：<span>0元</span>
+  </li>
+	<li>
+  	<input type="button" value="-" />
+    <strong>0</strong>
+  	<input type="button" value="+" />
+    单价：<em>14.5元</em>
+    小计：<span>0元</span>
+  </li>
+</ul>
+
+<p id="count">
+商品合计共：<span>0</span>件，共花费了：<span>0</span>元<br />
+其中最贵的商品单价是：<span>0</span>元
+</p>
+
+</body>
+</html>

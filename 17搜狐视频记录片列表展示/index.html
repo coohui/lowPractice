@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>搜狐视频记录片列表展示</title>
+<style>
+body{ padding:20px 100px; font-family:"宋体";}
+ul,li,p{ list-style:none; padding:0; margin:0;}
+#outer{ width:268px; height:396px; background: url(bg.jpg) no-repeat; position:relative;}
+#tab{ position:absolute; top:13px; left:153px;}
+#tab a{ font-size:12px; color:#185273; text-decoration:none;width:35px; height:25px; display:block; float:left; line-height:25px; text-align:center; margin-right:1px;}
+#tab a:hover{ font-weight:bold; color:#000; background:#fff; }
+#tab .hover{font-weight:bold; color:#000; background:#fff;}
+#content{ margin:0 6px; position:absolute; top:38px; left:0;width:255px; height:334px;}
+#content ul{ display:none;}
+#content li{height:26px; border-bottom:dashed 1px #fff;font-size:12px;_height:24px;}
+#content span{ display:block; float:left; font-size:12px; width:18px; height:13px; color:#fff; font-weight:bold; background:#29739c; margin:8px 10px 0 9px; text-align:center;_margin:8px 5px 0 4px;}
+#content p{ font-size:12px; line-height:30px;overflow:hidden;white-space: nowrap;text-overflow: ellipsis; width:216px; float:left; height:26px;_height:24px;}
+#content img{ display:none;}
+#content .hover img{ float:left; margin-top:8px; display:block;}
+#content .hover p{width:122px; padding:8px 0 0 8px; line-height:16px;float:left;word-break: normal;white-space: normal; overflow:visible;}
+#content .hover{ height:82px; background:#fff;_height:80px;_border-bottom:none;}
+</style>
+<script>
+window.onload=function(){
+	var oOuter=document.getElementById("outer");
+	var oTab=document.getElementById("tab");
+	var oContent=document.getElementById("content");
+	var aA=oTab.getElementsByTagName("a");
+	var aUl=oContent.getElementsByTagName("ul");
+		
+	for(var i=0;i<aUl.length;i++)
+	{
+		Tab(aUl[i]);
+	}
+	
+	function Tab(ul){
+		var aLi=ul.getElementsByTagName("li");
+		  for(var i=0;i<aA.length;i++)
+		  {
+			  aA[i].index=i;
+			  aA[i].onmouseover=function(){
+				 for(var i=0;i<aA.length;i++)
+				 {
+					 aUl[i].style.display="none";
+					 aA[i].className="";
+				 }
+				 this.className="hover";
+				 aUl[this.index].style.display="block";
+			  }
+		  }
+		  
+		  for(var i=0;i<aLi.length;i++)
+		  {
+			  aLi[i].index=i;
+			  aLi[i].onmouseover=function()
+			  {
+				  for(var i=0;i<aLi.length;i++)
+				  {
+					 aLi[i].className="";
+				  }
+				  this.className="hover";
+			  }
+		  }
+		  
+	}
+}
+</script>
+</head>
+<body>
+<div id="outer">
+     <div id="tab">
+          <a href="javascript:;" class="hover">每日</a>
+          <a href="javascript:;">每周</a>
+          <a href="javascript:;">全部</a>
+     </div>
+     <div id="content">
+          <ul style="display:block">
+              <li class="hover"><span>1</span><img src="mode0.jpg"/><p>《JavaScript dom 编程艺术》</p></li>
+              <li><span>2</span><img src="mode0.jpg"/><p>《javascript高级程序设计》(第三版)</p></li>
+              <li><span>3</span><img src="mode0.jpg"/><p>《高性能 JavaScript》</p></li>
+              <li><span>4</span><img src="mode0.jpg"/><p>《JavaScript语言精粹》</p></li>
+              <li><span>5</span><img src="mode0.jpg"/><p>《JavaScript DOM高级程序设计》</p></li>
+              <li><span>6</span><img src="mode0.jpg"/><p>《JavaScript设计模式》</p></li>
+              <li><span>7</span><img src="mode0.jpg"/><p>《高性能网站建设指南》</p></li>
+              <li><span>8</span><img src="mode0.jpg"/><p>《高性能网站建设进阶指南》</p></li>
+              <li><span>9</span><img src="mode0.jpg"/><p>《JavaScript权威指南》</p></li>
+              <li><span>10</span><img src="mode0.jpg"/><p>《JavaScript程序员参考手册》</p></li>
+          </ul>
+          <ul>
+              <li class="hover"><span>1</span><img src="mode1.jpg"/><p>春晚现大尺度反腐相声 批判官场圈子文化(图)</p></li>
+              <li><span>2</span><img src="mode1.jpg"/><p>联排完整节目单曝光 康辉脱口“甄嬛体”(图)</p></li>
+              <li><span>3</span><img src="mode1.jpg"/><p>NBA-哈登45+9+8火箭负 詹皇准三双骑士擒湖人</p></li>
+              <li><span>4</span><img src="mode1.jpg"/><p>曝章子怡汪峰婚期未定 求婚钻戒被疑是赞助</p></li>
+              <li><span>5</span><img src="mode1.jpg"/><p>孙俪邓超庆祝结婚纪念日 邓超傲娇比兰花指</p></li>
+              <li><span>6</span><img src="mode1.jpg"/><p>武艺生日遭孙海英斥责 楚楚赴西班牙险露宿</p></li>
+              <li><span>7</span><img src="mode1.jpg"/><p>未婚女教师宿舍产子后杀婴：工作忙没空打胎</p></li>
+              <li><span>8</span><img src="mode1.jpg"/><p>方舟子与网友试吃转基因大米 崔永元“插话”</p></li>
+              <li><span>9</span><img src="mode1.jpg"/><p>吴哥古迹拍裸照 美国2名女游客遭柬埔寨驱逐</p></li>
+              <li><span>10</span><img src="mode1.jpg"/><p>泰国怒斥美干涉内政：就愿意邀请中国来帮忙</p></li>
+          </ul>
+           <ul>
+              <li class="hover"><span>1</span><img src="mode2.jpg"/><p>习近平谈依法治国列十案例|共产党英文宣传片</p></li>
+              <li><span>2</span><img src="mode2.jpg"/><p>18张图告诉你 李克强怎么开会|舆论引导</p></li>
+              <li><span>3</span><img src="mode2.jpg"/><p>盘点“老虎”朋友圈:令氏家族手段高(图)</p></li>
+              <li><span>4</span><img src="mode2.jpg"/><p>70家上市公司卷入反腐风暴 中石油成重灾区</p></li>
+              <li><span>5</span><img src="mode2.jpg"/><p>今天记得加满油！油价明日料迎2015年首涨</p></li>
+              <li><span>6</span><img src="mode2.jpg"/><p>复兴坠机两岸遇难者同机同赔 2名陆客仍失踪</p></li>
+              <li><span>7</span><img src="mode2.jpg"/><p>除夕待遇“低人一等”:算调休加班无三薪</p></li>
+              <li><span>8</span><img src="mode2.jpg"/><p>赵志红确定为呼格案真凶 身负10命获死刑</p></li>
+              <li><span>9</span><img src="mode2.jpg"/><p>辩护律师:庭审没走过场 6项减罪意见均未采纳</p></li>
+              <li><span>10</span><img src="mode2.jpg"/><p>违规办证一路绿灯 山西官员倒手土地开发房产</p></li>
+          </ul>
+     </div>
+</div>
+
+
+</body>
+</html>

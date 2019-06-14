@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>自动生成V字型-只能用定位实现（基础版）</title>
+<style>
+body{ padding:20px;}
+input{ outline:none;}
+.outer{ position:relative; margin-top:20px;}
+ul{ padding:0; margin:0;}
+li{ width:100px; height:70px; position:absolute; list-style:none; padding:0; margin:0; text-align:center; font-size:30px; padding-top:30px; color:#fff; background:#F00}
+
+</style>
+<script>
+window.onload=function(){
+	var oUl=document.getElementById("oUl");
+	var oBtn=document.getElementsByTagName("input")[0];
+	var aLi= document.getElementsByTagName("li");
+	var i=j=0
+	
+	oBtn.onclick=function(){
+		for(i=0;i<5;i++)
+		{
+			oUl.innerHTML+="<li>"+i+"</li>";
+		}
+		for(i=-2,j=0;i<3,j<5;i++,j++)
+		{
+			aLi[j].style.top=(2-Math.abs(i))*100+"px";
+			aLi[j].style.left=j*100+"px";
+		}
+	}
+}
+</script>
+</head>
+<body>
+<input type="button" value="自动生成V字型"/>
+<div class="outer">
+     <ul id="oUl">
+     </ul>
+</div>
+
+
+</body>
+</html>

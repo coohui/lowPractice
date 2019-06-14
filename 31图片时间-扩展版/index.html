@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+body{ font-size:24px; font-weight:bold; padding:200px;}
+ul,li,img,p{ margin:0; padding:0; list-style:none; border:none; outline:none; vertical-align:middle;}
+#Clock{ position:relative;}
+#Clock li{ float:left;}
+</style>
+<title>图片时间</title>
+<script>
+window.onload=function(){
+	var oBady=document.getElementsByTagName("body")[0];
+	var oP=document.getElementById("show");
+	var aImg=document.getElementById("Clock").getElementsByTagName("img");
+	var str='';
+	var str1='';
+	
+    function Clock(){
+		var Time=new Date();
+		var oYear=Time.getFullYear();
+		var Month=Time.getMonth()+1;
+		var Day=Time.getDate();
+		var Week=Time.getDay();
+		if(Week===1){Week='星期一'}
+		if(Week===2){Week='星期二'}
+		if(Week===3){Week='星期三'}
+		if(Week===4){Week='星期四'}
+		if(Week===5){Week='星期五'}
+		if(Week===6){Week='星期六'}
+		if(Week===0){Week='星期日'}
+		var Hours=Time.getHours();
+		var Minutes=Time.getMinutes();
+		var Seconds=Time.getSeconds();
+		str=oYear+'年'+Month+'月'+Day+'日'+Week+toTwo(Hours)+':'+toTwo(Minutes)+':'+toTwo(Seconds);
+		oP.innerHTML=str;
+		str=toTwo(Hours)+'c'+toTwo(Minutes)+'c'+toTwo(Seconds);
+		for(var i=0;i<aImg.length;i++)
+		 {
+			if(i!==2||i!==5)
+			 { 
+			    aImg[i].src='img/'+str.charAt(i)+'.JPG';
+		     }
+		 }
+		 aImg[2].src='img/c0.JPG'; 
+		 aImg[5].src='img/c0.JPG';
+		 str1=toTwo(Hours)+':'+toTwo(Minutes)+':'+toTwo(Seconds);
+		 document.title=str1;
+     }
+	Clock();
+	
+	setInterval(function(){Clock()},1000);
+	
+	function toTwo(obj){
+	   return obj<10?obj='0'+obj:obj+'';
+	}
+}
+
+
+</script>
+</head>
+<body>
+<p id="show"></p><br/>
+<ul id="Clock">
+    <li><img src="img/0.JPG"></li>
+    <li><img src="img/0.JPG"></li>
+    <li><img src="img/c0.JPG"></li>
+    <li><img src="img/0.JPG"></li>
+    <li><img src="img/0.JPG"></li>
+    <li><img src="img/c0.JPG"></li>
+    <li><img src="img/0.JPG"></li>
+    <li><img src="img/0.JPG"></li>
+</ul>
+</body>
+</html>

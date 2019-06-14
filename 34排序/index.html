@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>排序</title>
+<style>
+ul,li{ list-style:none; margin:0; padding:0;}
+#wrap{ width:1265px; height:598px; position:relative; background: url(images/bg.jpg) no-repeat;}
+#picList{ position:absolute; top:98px; left:39px; }
+#picList li{ float:left;margin-right:22px; width:280px; height:223px; overflow:hidden;}
+#wrap a{width:118px; height:40px; position:absolute; top:30px;}
+#Order{ left:510px;}
+#UnOrder{ left:638px;}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+    var Order=document.getElementById("Order");
+	var UnOrder=document.getElementById("UnOrder");
+	var aImg=document.getElementById("picList").getElementsByTagName("img");
+	var arr=[1,2,3,4,5,6,7,8];
+	
+	Order.onclick=function(){
+		arr.sort(function(a,b){return a-b;});
+		for(var i=0;i<aImg.length;i++)
+		{
+			aImg[i].src="images/"+arr[i]+".jpg"
+		}
+	}
+	UnOrder.onclick=function(){
+		arr.sort(function(a,b){return Math.random()-0.5;});
+		for(var i=0;i<aImg.length;i++)
+		{
+			aImg[i].src="images/"+arr[i]+".jpg"
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id="wrap">
+<a id="Order" href="javascript:;"></a>
+<a id="UnOrder" href="javascript:;"></a>
+<ul id="picList">
+    <li><img src="images/1.jpg"/></li>
+    <li><img src="images/2.jpg"/></li>
+    <li><img src="images/3.jpg"/></li>
+    <li style=" margin:0;"><img src="images/4.jpg"/></li>
+    <li><img src="images/5.jpg"/></li>
+    <li><img src="images/6.jpg"/></li>
+    <li><img src="images/7.jpg"/></li>
+    <li style=" margin:0;"><img src="images/8.jpg"/></li>
+</ul>
+</div>
+</body>
+</html>

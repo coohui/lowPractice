@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBhLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>自动轮换选项卡</title>
+<style>
+ul,li,img{ margin:0; padding:0; list-style:none; cursor:pointer}
+body{ padding:100px; font-size:14px;}
+#tab{ width:344px; height:162px; background:url(images/bg.jpg) no-repeat; position:relative;}
+#menu{ height:30px; width:166px; position:absolute; top:20px; left:20px;}
+#menu li{ float:left; text-align:center; line-height:30px; width:80px; margin-left:2px;}
+#menu .hover{ background:#005a63; color:#fff;}
+#content{ width:300px; height:88px; position:absolute; top:52px;left:20px;}
+#content img{ float:left; width:200px; height:auto}
+#content ul{ float:left; width:100px; display:none;}
+#content li{ height:30px; width:100px; background:#f7f7f7; text-align:center; line-height:30px;}
+#content .hover{background:#639cc6;}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+     var oTab=document.getElementById("tab");
+	 var oMenu=document.getElementById("menu");
+	 var oContent=document.getElementById("content");
+	 var oImg=oContent.getElementsByTagName("img")[0];
+	 var aMenuLi=oMenu.getElementsByTagName("li");
+	 var aConLi=oContent.getElementsByTagName("li");
+	 var aUl=oContent.getElementsByTagName("ul");
+	 var timer=null;
+	 var iNow=0;
+	 var num=0;
+	 
+	 PicChange();	
+     function PicChange()
+	 {	
+	     clearInterval(timer);	 
+		 timer=setInterval(function(){
+		   iNow++;
+		   if(iNow<aConLi.length)
+			{
+			   for(var i=0;i<aConLi.length;i++)
+			   {
+				   aConLi[i].className="";
+			   }
+			   aConLi[iNow].className="hover";
+			}else
+			{
+				iNow=0;
+				aConLi[iNow].className="hover";
+			}
+			oImg.src="images/"+iNow+".jpg";
+			
+			if(iNow%3==0)
+			{
+				num++;
+				if(num>aMenuLi.length-1)
+				{
+					num=0;
+				}
+				tab();
+			}
+		 },1000)
+	 }
+	 
+	 function tab()
+	{
+	  for(var i=0;i<aMenuLi.length;i++)
+	  {
+		  aMenuLi[i].className="";
+		  aUl[i].style.display="none";
+	  }
+		  aMenuLi[num].className="hover";
+		  aUl[num].style.display="block";
+	}
+	
+     for(var i=0;i<aMenuLi.length;i++)
+	 {
+		 aMenuLi[i].index=i;
+		 aMenuLi[i].onmouseover=function(){
+			clearInterval(timer);
+			num=this.index;
+			for(var i=0;i<aConLi.length;i++)
+			   {
+				   aConLi[i].className="";
+			   }
+			iNow=this.index*3;
+			oImg.src="images/"+iNow+".jpg";
+			aConLi[iNow].className="hover"; 
+			tab();
+		 }
+		 aMenuLi[i].onmouseout=function(){
+			PicChange();
+		  }
+	 }
+			
+	 for(var i=0;i<aConLi.length;i++)
+	   {
+		   aConLi[i].index=i;
+		   aConLi[i].onmouseover=function(){
+			   clearInterval(timer);
+			   iNow=this.index;
+			   for(var i=0;i<aConLi.length;i++)
+				 {
+					 aConLi[i].className="";
+				 }
+			   oImg.src="images/"+iNow+".jpg";
+			   aConLi[iNow].className="hover";
+		   }
+		  aConLi[i].onmouseout=function(){
+			   PicChange();
+		  }
+	   }
+}
+</script>
+</head>
+<body>
+<div id="tab">
+    <div id="menu">
+         <ul>
+             <li class="hover">菜单一</li>
+             <li>菜单二</li>
+          </ul>
+    </div>
+    <div id="content">
+          <img src="images/0.jpg"/>
+          <ul style="display:block">
+              <li class="hover">图片一</li>
+              <li>图片二</li>
+              <li>图片三</li>
+          </ul>
+          <ul>
+              <li>图片四</li>
+              <li>图片五</li>
+              <li>图片六</li>
+          </ul>
+    </div>
+</div>
+</body>
+</html>

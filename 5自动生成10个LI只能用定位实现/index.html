@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>自动生成10个LI-只能用定位实现（基础版）</title>
+<style>
+body{ padding:20px;}
+ul{ position:relative; padding:0; margin:0;}
+li{ list-style:none; width:100px; height:70px; background:#; position:absolute;top:10px; text-align:center; padding-top:30px; line-height:36px; font-size:28px; font-weight:bolder;}
+
+</style>
+<script>
+window.onload=function(){
+	var oBtn= document.getElementsByTagName("input")[0];
+	var oUl= document.getElementsByTagName("ul")[0];
+	var aLi=document.getElementsByTagName("li");
+	var len=10;
+	var btn=true;
+	
+	oBtn.onclick=function(){
+		if(btn)
+		{
+		  for(var i=0;i<len;i++)
+		  {
+			  oUl.innerHTML+="<li>"+i+"</li>";
+			  aLi[i].style.left=(i*110)+"px";
+			  switch(i%4)
+			  {
+				  case 0:
+				  aLi[i].style.background="#f00";
+				  break;
+				  case 1:
+				  aLi[i].style.background="#00f";
+				  break;
+				  case 2:
+				  aLi[i].style.background="#ff0";
+				  break;
+				  case 3:
+				  aLi[i].style.background="#0f0";
+				  break;
+				  default:
+				  aLi[i].style.background="#0f8";
+			  }
+		  }
+		  btn=false;
+		}
+	}
+}
+
+</script>
+</head>
+
+<body>
+<input type="button" value="自动生成10个LI"/>
+<ul>
+</ul>
+</body>
+</html>

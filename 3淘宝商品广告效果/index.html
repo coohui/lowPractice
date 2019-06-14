@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>淘宝商品广告效果</title>
+<style>
+html,body{ margin:0; padding:50px;}
+ul,li,p{margin:0; padding:0; list-style:none; font-size:13px; line-height:30px; cursor:pointer}
+ul{ float:left; width:52px;}
+a{ outline:none; text-decoration:none;}
+#outer{ width:300px; height:222px; border:solid 1px #ff6300; margin:10px; padding:10px;}
+#lefttext li{ height:30px; background:url(images/bg1.jpg) no-repeat; text-align:center;}
+#lefttext li:hover{ background:url(images/bg.jpg) no-repeat; color:#fff;}
+#pic{ width:186px; height:100%; margin:0 2px; float:left; background:url(images/load.gif) center center no-repeat;}
+#righttext li{height:30px; background:url(images/bg1.jpg) no-repeat; text-align:center;}
+#righttext li:hover{background:url(images/bg.jpg) no-repeat;color:#fff;}
+#lefttext .current,#righttext .current{background:url(images/bg.jpg) no-repeat;color:#fff;}
+</style>
+<script>
+window.onload=function(){
+	 var oLi= document.getElementsByTagName("li");
+	 var oImag =document.getElementById("pic").getElementsByTagName("img")[0];	
+	 var iNow=0;
+	 var timer=paly=null;
+	 paly=function(){
+		timer=setInterval(function(){
+		if(iNow==oLi.length)
+		{
+		   iNow=0;
+		}else{
+		   for(var j=0;j<oLi.length;j++)
+			  {
+				  oLi[j].className="";
+			  }
+			  iNow++;
+			  if(iNow==oLi.length)
+			  {
+				 iNow=0;
+			  }
+			  oLi[iNow].className="current";
+			  oImag.src="images/"+(iNow+1)+".jpg";
+		   }
+		 },1000);
+	 }
+	 paly();
+	 for(var i=0;i<oLi.length;i++){
+	    oLi[i].index=i;
+		oLi[i].onmouseover=function(){
+			clearInterval(timer);
+		    iNow=this.index;
+			for(var j=0;j<oLi.length;j++)
+			{
+				oLi[j].className="";
+			}
+		    oLi[iNow].className="current";
+			oImag.src="images/"+(iNow+1)+".jpg";
+		};
+	   oLi[i].onmouseout=function(){
+		   clearInterval(timer);
+		   paly();
+		};
+	 }
+	}
+</script>
+</head>
+<body>
+<div id="outer">
+     <ul id="lefttext">
+         <li class="current">连衣裙</li>
+         <li>雪纺</li>
+         <li>T恤</li>
+         <li>铅笔裤</li>
+         <li>婚纱</li>
+         <li>外套</li>
+         <li>连体裤</li>
+     </ul>
+     <div id="pic">
+         <img src="images/1.jpg">
+     </div>
+     <ul id="righttext">
+         <li>包包</li>
+         <li>凉鞋</li>
+         <li>单鞋</li>
+         <li>太阳镜</li>
+         <li>丝袜</li>
+         <li>帆布鞋</li>
+         <li>情侣装</li>
+     </ul>
+</div>
+</body>
+</html>

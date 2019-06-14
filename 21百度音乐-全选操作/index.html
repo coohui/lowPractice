@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>百度音乐</title>
+<style>
+body{ padding:100px;}
+#baidu{ width:312px; height:218px; background:url(bg.jpg) no-repeat;}
+ul,li,img,p,input{ margin:0; padding:0; list-style:none;}
+li{ height:23px; padding:8px 0 0 17px; width:100%;}
+li:hover{ background:#efefef; opacity:0.5; filter:alpha(opacity:50);}
+.hover{background:#efefef; opacity:0.5; filter:alpha(opacity:50);}
+input{ outline:none; border:none;background:none; width:14px; height:14px;display:block;}
+#btn{padding:8px 0 0 17px;}
+</style>
+<script>
+window.onload=function(){
+	var oBaidu=document.getElementById("baidu");
+	var aLi=oBaidu.getElementsByTagName("li");
+	var aInput=oBaidu.getElementsByTagName("input");
+	var oBtn=document.getElementById("btn");
+	var oInput=document.getElementById("btn").getElementsByTagName("input")[0];
+	
+	for(var i=0;i<aLi.length;i++)
+	{
+		aInput[i].index=i;
+		aInput[i].onclick=function()
+		{
+			if(this.checked)
+			{
+				aLi[this.index].className="hover";
+			}else
+			{
+				aLi[this.index].className="";
+			}
+		}
+	}
+	oInput.onclick=function(){
+		if(oInput.checked)
+		{
+			for(var i=0;i<aLi.length;i++)
+			 {
+				 aInput[i].checked=true;
+				 aLi[i].className="hover";
+			 }
+		}else
+		{
+		    for(var i=0;i<aLi.length;i++)
+			 {
+				 aInput[i].checked=false;
+				 aLi[i].className="";
+			 }
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id="baidu">
+     <ul>
+         <li><input type="checkbox"></li>
+         <li><input type="checkbox"></li>
+         <li><input type="checkbox"></li>
+         <li><input type="checkbox"></li>
+         <li><input type="checkbox"></li>
+         <li><input type="checkbox"></li>
+     </ul>
+     <div id="btn"><input type="checkbox"></div>
+
+</div>
+</body>
+</html>

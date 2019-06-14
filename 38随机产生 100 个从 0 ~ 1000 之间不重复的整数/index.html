@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>随机产生 100 个从 0 ~ 1000 之间不重复的整数</title>
+<script type="text/javascript">
+window.onload=function(){
+    var oBody=document.getElementsByTagName("body")[0];
+	var str='';
+	var arr=[];
+    var len=0;
+	var num=100;
+	
+	judge();
+	
+	function init(){
+		len=arr.length;
+		for(var i=0;i<num-len;i++)
+		{
+			arr.push((Math.round(Math.random()*1000)));
+		}
+		Delete();
+		judge();
+	}	
+	
+	function Delete(){
+		for(var i=0;i<arr.length;i++)
+		{
+			for(var j=i+1;j<arr.length;j++)
+			{
+				if(arr[i]==arr[j])
+				{
+					arr.splice(j,1);
+					j--;
+					console.log(arr[j]);
+				}
+			}
+		}
+		 console.log("删除了"+(num-arr.length));
+	}
+	
+	function judge(){
+	   if(arr.length<num)
+	   {
+		   init();
+	    }else
+	   {
+		console.log("完成！"+arr.length);
+	   }
+	   
+	}
+
+	for(var i=0;i<num;i++)
+	{ str+=+(i+1)+"、"+arr[i]+"<br/>"}
+	oBody.innerHTML=str;
+}
+</script>
+</head>
+<body>
+</body>
+</html>

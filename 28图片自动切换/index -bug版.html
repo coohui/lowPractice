@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>图片自动切换</title>
+<style>
+body{ padding:200px 0 0 600px;}
+ul,li,img,p{ margin:0; padding:0; list-style:none;}
+.outer{ height:315px; width:514px; padding:6px 0 0 6px; background:url(images/bg.jpg) no-repeat;}
+#div1{position:relative;width:500px; height:300px; overflow:hidden;}
+#div1 li{ position:absolute; width:500px; height:300px; top:0; left:0;}
+#div1 li p{ position:absolute; bottom:0; left:0; width:500px; height:0px; overflow:hidden;  z-index:99; color:#fff; background:url(images/textbg.png) repeat-x; text-align:center}
+#div1 li strong{color:#fff; line-height:38px;}
+</style>
+<!--[if IE 6]>
+<script src="pngfix.js" mce_src="pngfix.js"></script>
+<script type="text/javascript">DD_belatedPNG.fix('*');</script>
+<![endif]--> 
+<script type="text/javascript" src="coohuiMove.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+    var oUl=document.getElementById("div1");
+	var aLi=document.getElementsByTagName("li");
+	var wWidth=parseInt(getStyle(aLi[0],'width'));
+	var aP=document.getElementsByTagName("p");
+    var iNow=0;
+	var iNowNext=1;
+	var timer=null;
+	
+	for(var i=0;i<aLi.length;i++)
+	{
+		aLi[i].style.left=-wWidth+'px';
+		aLi[iNow].style.left=0;
+	}
+	
+	timer=setInterval(function(){
+		    //clearInterval(timer);
+			 if(iNow==aLi.length)
+			 {
+				iNow=0;
+				doMove(aLi[iNow],'left',20,wWidth,function(){aLi[iNow].style.left=-wWidth+'px';});
+			 }else
+			 {
+				doMove(aLi[iNow],'left',20,wWidth,function(){aLi[iNow].style.left=-wWidth+'px';});
+			 }
+			 
+			 if(iNowNext==aLi.length)
+			 {
+				iNowNext=0;
+				doMove(aLi[iNowNext],'left',20,0,function(){toText()});
+			 }else
+			 {
+				doMove(aLi[iNowNext],'left',20,0,function(){toText()});
+			 }
+		  
+		},4000)
+		
+		function toText(){
+			  doMove(aP[iNowNext],'height',14,76,function(){
+							   setTimeout(function(){doMove(aP[iNowNext],'height',10,0,function(){iNowNext++;iNow++})}
+							   ,1500)
+						  })
+		}
+	
+   function getStyle(obj,attr){ return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr];}		
+}
+</script>
+</head>
+<body>
+<div class="outer">
+      <ul id="div1">
+           <li><img src="images/1.jpg"/><p><strong>图片一</strong><br/>我是第一张图片</p></li>
+           <li><img src="images/2.jpg"/><p><strong>图片二</strong><br/>我是第二张图片</p></li>
+           <li><img src="images/3.jpg"/><p><strong>图片三</strong><br/>我是第三张图片</p></li>
+           <li><img src="images/4.jpg"/><p><strong>图片四</strong><br/>我是第四张图片</p></li>
+           <li><img src="images/5.jpg"/><p><strong>图片五</strong><br/>我是第五张图片</p></li>
+      </ul>
+</div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>自动生成100个LI-只能用定位实现（基础版）</title>
+<style>
+body{ padding:20px;}
+ul{ position:relative; padding:0; margin-top:20px;}
+li{ list-style:none; width:100px; height:70px; /*background:#ff0; */position:absolute;top:10px; text-align:center; padding-top:30px; line-height:36px; font-size:28px; font-weight:bolder;}
+
+</style>
+<script>
+window.onload=function(){
+	var oBtn= document.getElementsByTagName("input")[0];
+	var oUl= document.getElementsByTagName("ul")[0];
+	var aLi=document.getElementsByTagName("li");
+	var len=100;
+	var arr="";
+	var onOff=true;
+	var k =0;
+
+	oBtn.onclick=function(){
+		if(onOff)
+		{
+			for(var i=0;i<len;i++)
+			{
+				   arr+="<li>"+i+"</li>";
+			}
+			
+		  oUl.innerHTML=arr;
+		  for(var i=0;i<10;i++)
+		  {
+			  for(var j=9;j>-1;j--)
+			  {
+				  aLi[k].style.top=i*110+"px";
+				  aLi[k].style.left=(9-j)*110+"px";
+				  switch(k%4)
+					  {
+						  case 0:
+						  aLi[k].style.background="#f00";
+						  break;                                                 
+						  case 1:
+						  aLi[k].style.background="#00f";
+						  break;
+						  case 2:
+						  aLi[k].style.background="#ff0";
+						  break;
+						  case 3:
+						  aLi[k].style.background="#0f0";
+						  break;
+						  default:
+						  aLi[k].style.background="#f0f";
+					  }
+				  k==100?k=0:k++;
+			  }
+		  }
+		 onOff=false;
+		}
+	}
+}
+</script>
+</head>
+<body>
+<input type="button" value="自动生成100个LI"/>
+<ul>
+</ul>
+</body>
+</html>

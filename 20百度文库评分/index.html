@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>百度文库评分</title>
+<style>
+body{ padding:100px;}
+#baidu{ width:544px; height:63px; background:url(bg.jpg) no-repeat;}
+ul,li,img,p{ margin:0; padding:0; list-style:none;}
+ul{ margin-left:97px; width:125px; float:left;_margin-left:50px;}
+li{ width:25px; height:26px; float:left; margin-top:19px;}
+p{ float:left; background:url(tip.jpg) no-repeat;width:248px; height:45px; padding:18px 0 0 9px; line-height:30px; font-weight:bold; color:#ef7300}
+img{ display:none; border:none; vertical-align:middle; margin:0; padding:0;}
+</style>
+<script>
+window.onload=function(){
+      var oBaidu=document.getElementById("baidu");
+	  var aLi=oBaidu.getElementsByTagName("li");
+	  var aImg=oBaidu.getElementsByTagName("img");
+	  var oP=oBaidu.getElementsByTagName("p")[0];
+	  var arr=["很差","较差","还行","推荐","力荐"];
+	  var btn=false;
+	  
+	  for(var i=0;i<aLi.length;i++)
+	  {
+		  aLi[i].index=i;
+		  var temp=null;
+		  aLi[i].onmouseover =function(){
+			  oP.style.background="none";
+			  oP.innerHTML=arr[this.index];
+			  for(var i=0;i<aLi.length;i++)
+			  {
+				 aImg[i].style.display="none"; 
+			  }
+		      for(var i=0;i<=this.index;i++)
+			  {
+				 aImg[i].style.display="block";
+			  }
+			  
+		  }
+		  
+		  aLi[i].onmouseout =function(){
+			  for(var i=0;i<aLi.length;i++)
+			  {
+				 aImg[i].style.display="none"; 
+			  }
+			  if(btn)
+			  {
+				 oP.style.background="none";
+				 for(var i=0;i<=temp;i++)
+				  {
+					 aImg[i].style.display="block";
+				  } 
+			  }else
+			  {
+				  oP.style.background="url(tip.jpg) no-repeat"; 
+				  oP.innerHTML="";
+			  }
+		  }
+		  
+		  aLi[i].onclick=function(){
+			  temp=this.index;
+			  btn=true;
+			  for(var i=0;i<aLi.length;i++)
+			  {
+				 aImg[i].style.display="none"; 
+			  }
+		      for(var i=0;i<=this.index;i++)
+			  {
+				 aImg[i].style.display="block";
+			  }
+			  
+		  }
+	  }
+}
+</script>
+</head>
+<body>
+<div id="baidu">
+    <ul>
+        <li><img src="star.jpg"/></li>
+        <li><img src="star.jpg"/></li>
+        <li><img src="star1.jpg"/></li>
+        <li><img src="star1.jpg"/></li>
+        <li><img src="star1.jpg"/></li>
+    </ul>
+    <p></p>
+</div>
+
+</body>
+</html>

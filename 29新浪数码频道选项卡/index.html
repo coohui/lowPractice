@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>新浪数码频道选项卡</title>
+<style>
+body{ padding:200px 0 0 600px; font-family:"宋体"}
+ul,li,img,p{ margin:0; padding:0; list-style:none; border:none; vertical-align:top}
+a{ cursor:pointer;}
+.outer{ height:268px; width:712px; position:relative; background:url(images/bg.jpg) no-repeat;}
+#Menu{ position:absolute; top:16px; left:158px; width:248px; height:30px; }
+#Menu li{width:110px;height:30px; float:left; background:#FC6; line-height:30px; text-align:center; font-size:14px; cursor:pointer}
+#Menu .hover{ background:#FFF; color:#6C3}
+#pic {position:absolute; top:56px; left:15px;}
+#tab{ top:56px; left:216px;width:486px; height:200px;overflow:hidden; position:absolute; }
+#tab ul{display:none; position:absolute; top:0; left:0;height:166px;}
+#tab li{ float:left;height:200px; width:162px; text-align:center;}
+#tab p{ text-align:center; font-size:14px; color:#999; line-height:24px;}
+.bd{position:absolute; top:154px; left:162px; width:208px; height:20px; display:none;}
+.pre ,.next ,span{ width:19px; height:19px; display:block; float:left; background:url(images/pre.jpg) no-repeat;}
+span{ background:url(images/nod.jpg) center center no-repeat;}
+.bd .hover{ background:url(images/hover.jpg) center center no-repeat;}
+.next{ background:url(images/next.jpg) no-repeat;}
+</style>
+<!--[if IE 6]>
+<script src="pngfix.js" mce_src="pngfix.js"></script>
+<script type="text/javascript">DD_belatedPNG.fix('*');</script>
+<![endif]--> 
+<script type="text/javascript" src="coohuiMove.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	var aMenuLi=document.getElementById("Menu").getElementsByTagName("li");
+	var oPicImg=document.getElementById("pic").getElementsByTagName("img")[0];
+	var oTab=document.getElementById("tab");
+	var aUl=oTab.getElementsByTagName("ul");
+	var aDiv=oTab.getElementsByTagName("div");
+	var wWidth=parseInt(getStyle(oTab.getElementsByTagName("li")[0],'width'))*3;
+	var arr=[];
+	var arrInow=[];
+	var iNow=0;
+
+	for(var i=0;i<aMenuLi.length;i++)
+	{
+		var str='';
+		var aSpan=aDiv[i].getElementsByTagName("span");
+		arrInow[i]=0;
+		aMenuLi[i].index=i;
+		aDiv[i].index=i;
+		arr[i]=aUl[i].getElementsByTagName("li");
+		aUl[i].style.width=wWidth*arr[i].length+'px';
+		arr[i]=Math.ceil(arr[i].length/3);
+						
+		for(var j=0;j<arr[i];j++)
+		{
+			str+='<span></span>';
+		}
+
+		aDiv[i].innerHTML='<a class="pre"></a>'+str+'<a class="next"></a>';
+		aSpan[0].className='hover';
+		
+		function tab(){
+		  var aSpan=aDiv[iNow].getElementsByTagName("span");
+		  var oPre=aDiv[iNow].getElementsByTagName("a")[0];
+		  var oNext=aDiv[iNow].getElementsByTagName("a")[1];
+		  iNow2=arrInow[iNow];
+		  oPicImg.src='images/0'+iNow+'.jpg';
+  
+		  oPre.onclick=function(){
+  
+			iNow2==arr[iNow]-1?iNow2:iNow2++;
+			doMove(aUl[iNow],'left',20,-wWidth*iNow2);
+			for(var i=0;i<aSpan.length;i++)
+			{
+				aSpan[i].className=' ';
+			}
+			aSpan[iNow2].className='hover';
+			arrInow[iNow]=iNow2;
+			}
+		   oNext.onclick=function(){
+			
+			iNow2==0?iNow2:iNow2--;
+			doMove(aUl[iNow],'left',20,-wWidth*iNow2);
+			for(var i=0;i<aSpan.length;i++)
+			{
+				aSpan[i].className=' ';
+			}
+			aSpan[iNow2].className='hover';
+			arrInow[iNow]=iNow2;
+			}
+		}
+		tab();
+		aMenuLi[i].onmouseover=function()
+		{
+		    iNow=this.index;
+			tab();
+		    for(var i=0;i<aMenuLi.length;i++)
+		    {
+				aMenuLi[i].className=' ';
+				aUl[i].style.display='none';
+				aDiv[i].style.display='none';
+			}
+			 aMenuLi[iNow].className='hover';
+			 oPicImg.src='images/0'+iNow+'.jpg';
+			 aUl[iNow].style.display='block';
+			 aDiv[iNow].style.display='block';
+		}
+	}
+	function getStyle(obj,attr){ return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr];}	
+
+}
+</script>
+</head>
+<body>
+<div class="outer">
+      <ul id="Menu">
+           <li class="hover">新品</li>
+           <li>极客</li>
+      </ul>
+      <ul id="pic">
+          <li><img src="images/01.jpg"/></li>
+      </ul>
+      <div id="tab">
+           <ul style="display:block">
+               <li><img src="images/1.jpg"/><p>图片一</p></li>
+               <li><img src="images/1.jpg"/><p>图片一</p></li>
+               <li><img src="images/1.jpg"/><p>图片一</p></li>
+               <li><img src="images/2.jpg"/><p>图片四</p></li>
+               <li><img src="images/2.jpg"/><p>图片五</p></li>
+               <li><img src="images/2.jpg"/><p>图片六</p></li>
+               <li><img src="images/3.jpg"/><p>图片七</p></li>
+               <li><img src="images/3.jpg"/><p>图片八</p></li>
+               <li><img src="images/3.jpg"/><p>图片十</p></li>
+           </ul>
+           <div class="bd" style="display:block"></div>
+           <ul>
+               <li><img src="images/4.jpg"/><p>图片十一</p></li>
+               <li><img src="images/5.jpg"/><p>图片十二</p></li>
+               <li><img src="images/4.jpg"/><p>图片十三</p></li>
+               <li><img src="images/4.jpg"/><p>图片十四</p></li>
+               <li><img src="images/5.jpg"/><p>图片十五</p></li>
+               <li><img src="images/4.jpg"/><p>图片十六</p></li>
+           </ul>
+           <div class="bd"></div>
+      </div>
+</div>
+</body>
+</html>
+<!--内嵌套本人用的数组，其实也可以用传参！-->
+
+
+

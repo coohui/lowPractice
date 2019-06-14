@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>点击往下掉，再点击，再飘回来……一直循环</title>
+<script src="coohuiMove.js"></script>
+<script>
+window.onload = function () {
+	var str = '';
+	var len = 20;
+	var aDiv = document.getElementsByTagName('div');
+	var timer = null;
+	var num = 0;
+	var btn=false;
+	
+	for ( var i=0; i<len; i++ ) {
+		str += '<div style="width:50px; height:50px; background:red; position:absolute; top:0px; left:'+ i*60 +'px;"></div>';
+	}
+	
+	document.body.innerHTML = str;
+	
+	document.onclick = function () {
+		clearInterval( timer );
+		
+		timer = setInterval( function (){
+			if(btn)
+			{
+			   doMove( aDiv[num], 'top', 23, 500 );
+			   num ++;
+			}else
+			{
+			   doMove( aDiv[num], 'top', 23, 0 );
+			   num --;
+			}
+			
+			if ( num === len||num<0 ) {
+				num>=len&&(num=len-1);
+				num<0&&(num=0);
+				clearInterval( timer );
+			}
+			document.title=num;
+		}, 100 );
+		btn==true?btn=false:btn=true;
+	};
+};
+</script>
+
+</head>
+
+<body>
+</body>
+</html>
+

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>修改文本框的值</title>
+<style>
+body{ padding:30px;}
+ul,li,h4,img{ padding:0; margin:0; list-style:none;vertical-align:top;}
+p{ float:left;padding:0; margin:0; line-height:24px;}
+h4{ background:#6ba542; height:30px; line-height:30px; color:#fff;padding-left:20px; font-size:15px; margin-bottom:4px;}
+li{padding-left:20px; display:block;height:30px; line-height:30px; font-size:14px; font-family:"微软雅黑"; clear:both;}
+img{ margin-left:10px;}
+input{ display:block; float:left; width:150px; outline:none; font-size:13px; font-family:"微软雅黑"; height:20px;line-height:20px;margin-right:10px;}
+span{ display:block; float:left;height:30px; width:50px;color:#6ba542; cursor:pointer; text-align:center}
+span:hover{ color:#fff; background:#6ba542}
+em{ font-style:normal;display:block; float:left; height:30px; width:50px; color:#6ba542;cursor:pointer;text-align:center}
+em:hover{color:#fff; background:#6ba542}
+</style>
+<script>
+window.onload=function(){
+     
+       var oOuter=document.getElementById("outer");
+	   var aLi=oOuter.getElementsByTagName("li");
+	   for(var i=0; i<aLi.length;i++)
+	   {
+		  changeText(aLi[i]);
+	   }
+	   
+	   function changeText(oLi){
+		   var oImg=oLi.getElementsByTagName("img")[0];
+		   var oP=oLi.getElementsByTagName("p")[0];
+		   var oSpan=oLi.getElementsByTagName("span")[0];
+		   var oEm=oLi.getElementsByTagName("em")[0];
+		   var oInput=oLi.getElementsByTagName("input")[0];
+		   var aDiv= oLi.getElementsByTagName("div");
+		   var value=null;
+		   
+		   oImg.onclick=function(){ 	  
+			  value=oP.innerHTML; 
+			  aDiv[0].style.display="none";
+			  aDiv[1].style.display="block";
+			  oInput.value=oP.innerHTML;
+		   }
+		   
+			oSpan.onclick=function(){
+			  aDiv[1].style.display="none";
+			  aDiv[0].style.display="block";
+			  oP.innerHTML=oInput.value;
+			  
+			  }
+			oEm.onclick=function(){
+			  aDiv[1].style.display="none";
+			  aDiv[0].style.display="block";
+			  oP.innerHTML=value;
+			 }
+	   }
+}
+
+
+</script>
+</head>
+<body>
+<div id="outer">
+     <h4>分类名称</h4>
+     <ul>
+         <li><div><p>新上海滩</p><img src="images/bg.jpg"/></div><div style="display:none"><input type="text" value=""/><span>保存</span><em>取消</em></div></li>
+         <li><div><p>重返20岁</p><img src="images/bg.jpg"/></div><div style="display:none"><input type="text" value=""/><span>保存</span><em>取消</em></div></li>
+         <li><div><p>一步之遥</p><img src="images/bg.jpg"/></div><div style="display:none"><input type="text" value=""/><span>保存</span><em>取消</em></div></li>
+     </ul>
+</div>
+</body>
+</html>

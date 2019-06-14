@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>模拟短信</title>
+<style>
+html,body{ margin:0; padding:0; font-family:"微软雅黑";}
+body{ margin:100px;}
+p{margin:0; padding:0; font-size:14px;}
+ul,li{ list-style:none; margin:0; padding:0;}
+input{ outline:none;margin:0; padding:0; border:none;_border:0;}
+a{ outline:none; text-decoration:none;}
+#center{width:360px; height:600px; background: url(images/bg.jpg) 0 0 no-repeat; padding-top:90px; }
+#content{height:360px;width:232px;float:left; margin:0 0 0 30px;overflow:auto; overflow-x:hidden;_margin:0 0 0 16px;}
+#send{width:230px; height:32px;float:left;margin:18px 40px 0 32px;_margin:18px 20px 0 16px;}
+#face{ display:block; float:left;height:32px;}
+#message{ width:120px; height:32px; border:none;float:left;font-size:14px;font-family:"微软雅黑"; line-height:32px; color:#454545;margin:0 20px 0 16px;_margin:0 10px 8px;_border:0;_width:130px;}
+#btn{height:32px;width:46px; background:url(images/summit.jpg) no-repeat; margin:0; padding:0; border:none; float:left; cursor:pointer}
+.richman{padding:5px 0;float:left;width:224px;}
+.richman p{ background:#ded6e7;color:#000;float:left; max-width:148px; display:block; height:auto;word-wrap:break-word;padding:10px;}
+.poorman{padding:5px 0; float:right;width:224px;}
+.poorman p{ background:#21c618; color:#FFF;float:right; display:block;max-width:144px;height:auto;padding:10px;word-wrap:break-word;margin-left:4px; _margin-left:2px _width:136px;}
+.face1{ width:27px; height:30px; background:url(images/face1.jpg) no-repeat;float:left; display:block; margin:2px 6px;_margin:2px 3px;}
+.face2{ width:27px; height:30px; background:url(images/face2.jpg) no-repeat;float:right; display:block; margin:2px 6px;_margin:2px 3px;}
+</style>
+<script>
+window.onload=function(){
+      var oContent=document.getElementById("content");
+	  var oFace= document.getElementById("face").getElementsByTagName("img")[0];
+	  var oMessage=document.getElementById("message");
+	  var oBtn= document.getElementById("btn");
+	  var judge=true;
+	  
+	  document.onkeydown = function (event)
+		{
+			var event = event || window.event;
+			switch (event.keyCode)
+			{
+				case 17:
+				    changeFace();
+				    break;
+				case 13:
+					sendMessage();
+					break;
+			}
+		};
+		
+       oFace.onclick=changeFace;
+	   function changeFace(){
+			  if(judge)
+			  {
+				  oFace.src="images/face2.jpg"
+			  }else
+			  {
+				  oFace.src="images/face1.jpg"
+			  }
+			  
+			  judge?(judge=false):(judge=true);
+	   }
+	   
+	  oBtn.onclick=sendMessage;
+	  function sendMessage(){
+		  if(judge)
+		  {
+			 if(oMessage.value==""){
+				 return false;
+			
+			 }else{
+			  oContent.innerHTML="<div class="+"richman"+"><span class="+"face1"+"></span><p>"+oMessage.value+"</p></div>"+oContent.innerHTML;
+			  oMessage.value="";
+			}
+		  }else{
+			  if(oMessage.value==""){
+				 return false;
+			 }else{
+			 oContent.innerHTML="<div class="+"poorman"+"><span class="+"face2"+"></span><p>"+oMessage.value+"</p></div>"+oContent.innerHTML;
+			 oMessage.value="";
+			 }
+		  }
+	  }
+}
+</script>
+</head>
+<body>
+<div id="center">
+     <div id="content"></div>
+     <div id="send">
+          <span id="face"><img src="images/face1.jpg"/></span><input id="message" type="text"/><input id="btn" type="button" value="" />
+     </div>
+</div>
+</body>
+</html>
+<!--通过IE，火狐，谷歌测试！-->

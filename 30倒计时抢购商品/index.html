@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>倒计时抢购商品</title>
+<style>
+body{ padding:200px;}
+.clear {zoom:1;}
+.clear:after { content:''; display:block; clear:both;}
+ul,li,p,input,img,strong,em{ margin:0; padding:0; list-style:none; outline:none; vertical-align:middle; font-style:normal;}
+input{ margin-left:4px; float:left; border:none; height:20px; line-height:20px;border:none;}
+strong{ text-align:center;}
+h4{ height:30px; border-bottom:2px solid #a0a0a4; margin-bottom:10px;}
+.set{ width:126px; background:#ded6e7; margin-right:4px}
+.beSure{ font-weight:bold; color:#734a52; background:none; font-size:16px; font-family:"微软雅黑"; display:block; cursor:pointer}
+.outer{ width:730px;}
+#products{position:relative; width:722px; height:280px; background:url(images/bg.jpg) no-repeat;}
+#products input{ float:left;}
+#products li{position:absolute; width:178px; height:280px; border-right:solid 2px #ded6e7; text-align:center; background:#FFF; top:0; opacity:1; filter:alpha(opacity=100);}
+#products strong{ font-size:14px; line-height:28px; color:#a0a0a4; display:block; clear:both;}
+#products p{ font-size:14px; font-family:"宋体"; color:#333; padding:10px 0 10px 0;}
+#products em{ color:#bd214a; font-weight:bold;}
+#products span{ color:#bdadbd; font-weight:bold;}
+.tit{ clear:both;width:722px;background:#ded6e7; height:38px; margin-top:20px;}
+.tit p{ float:left; width:190px; text-align:center; line-height:38px; font-size:14px; font-weight:bold; padding:0;}
+#allPrice{ font-weight:bold; text-align:left; height:30px; margin-top:14px; line-height:30px; padding-left:10px; clear:both;}
+#allPrice span{ font-weight:bold; color:#a22535}
+#list{width:730px;}
+#list p{ float:left; width:200px; padding-top:20px;font-size:14px; font-family:"宋体"; line-height:24px; padding-left:4px; text-align:center;}
+#list strong{ float:left; display:block;width:170px;padding-top:20px;clear:none; color:#59262f}
+#list img{ float:left; margin:0 0 0 200px; width:80px; height:60px; border:solid 1px #8c4a4c; position:static}
+#list li{ border:none;width:722px; height:68px; margin-top:6px; background:#ded5e6; padding-top:5px; }
+</style>
+<script>
+window.onload=function(){
+	  var aInput=document.getElementsByTagName("input");
+	  var aA=document.getElementsByTagName("a");
+	  var oProducts=document.getElementById("products");
+	  var aLi=oProducts.getElementsByTagName("li");
+	  var aStrong=oProducts.getElementsByTagName("strong");
+	  var aP=oProducts.getElementsByTagName("p");
+	  var aEm=oProducts.getElementsByTagName("em");
+	  var oAllPrice=document.getElementById("allPrice");
+	  var oList=document.getElementById("list");
+	  var oSpan = oAllPrice.getElementsByTagName('span')[0];
+	  var pos=[];
+	  var iNew=[];
+	  var arrAllprice=[];
+	  var add=0;
+	  
+      for(var i=0;i<aLi.length;i++)
+	  {
+		  aLi[i].style.left=i* (parseInt( getStyle(aLi[0],'width'))+2)+'px'; 
+		  aA[i].index=i;
+		  aLi[i].btn='on';
+	      pos[i] = parseInt( getStyle(aLi[i], 'left') );
+		  aA[i].onclick=function(){
+			countDown(this.index);}
+		  
+	  }
+	  
+	  function countDown(num){
+		 iNew[num]=new Date(aInput[num].value);
+		 function star(){
+			var iNow=new Date();
+			var t=Math.floor((iNew[num]-iNow)/1000);
+			if(t>=0)
+			{
+			   aStrong[num].innerHTML='剩余'+ Math.floor(t/86400)+'天'+toTwo(Math.floor(t%86400/3600))+'时'+toTwo(Math.floor(t%86400%3600/60))+'分'+toTwo(t%60)+'秒';
+			}else
+			{
+				if(aLi[num].btn=='on')
+				{
+				  var Temp=0;
+				  var oLi=document.createElement("li");
+				  clearInterval(num.timer);
+				  shake(aLi[num], pos[num],drop(aLi[num],0,function(){setTimeout(function(){addLi(num)},300)}));
+				  
+				  function addLi(num){
+					oList.appendChild(oLi);
+					var oListLi=oList.getElementsByTagName('li');
+					oListLi[add].innerHTML="<p>"+aP[num].innerHTML+"</p><strong>"+aEm[num].innerHTML+"</strong><img src='images/"+num+".jpg'/>";
+					arrAllprice.push(parseInt(aEm[num].innerHTML));
+					for(var i=0;i<arrAllprice.length;i++)
+					{
+  
+						Temp+=arrAllprice[i];
+					}
+					oSpan.innerHTML=Temp;
+					add++;
+				  }
+				}
+				aLi[num].btn='off';
+			}
+		  };
+		  star();
+		  num.timer=setInterval(star,1000);
+	  }
+	  function toTwo ( n ) {return n < 10 ?  '0' + n : '' + n;};
+	  function getStyle ( obj, attr ) { return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle( obj )[attr]; }
+	  
+	  function shake ( obj, attr, endFn ) {
+	  
+		  var arr = [];			// 20, -20, 18, -18 ..... 0
+		  var num = 0;
+		  var timer = null;
+			  
+		  for ( var i=6; i>0; i-=2 ) {
+			  arr.push( i, -i );
+		  }
+		  arr.push(0);
+			  
+		  clearInterval( obj.shake );
+		  obj.shake = setInterval(function (){
+			  obj.style.left = attr+ arr[num] + 'px';
+			  num++;
+			  if ( num === arr.length ) {
+				  clearInterval( obj.shake );
+				  endFn && endFn();
+			  }
+		  }, 50);
+	  }
+	  
+	  function drop(obj, attr, endFn){
+		  var speed=0;
+		  var speedOpcity=100;
+		  clearInterval( obj.drop );
+		  obj.drop = setInterval(function (){
+			  obj.style.top = attr+speed + 'px';
+			  obj.style.filter = 'alpha(opacity='+speedOpcity+')';
+			  obj.style.opacity=speedOpcity/100;
+			  speed=speed+20;
+			  speedOpcity=speedOpcity-5;
+			  if ( speed >=260||speedOpcity<=0) {
+				  obj.style.top =260+ 'px';
+				  obj.style.filter = 'alpha(opacity='+0+')';
+			      obj.style.opacity=0;
+				  clearInterval( obj.drop );
+				  endFn && endFn();
+			  }
+		  }, 30);
+	  
+	  }
+}
+</script>
+</head>
+
+<body>
+<div class="outer">
+     <h4>限购时间</h4>
+     <ul class="clear" id="products">
+         <li>
+            <input type="text" value="April 8,2015 17:28:0" class="set"><a class="beSure">确定</a>
+             <strong>剩余00天00小时00分00</strong><br/>
+             <img src="images/0.jpg"/>
+             <p>商品一</p>
+             <span>抢购价：</span>￥<em>599.00</em>
+         </li>
+         <li>
+             <input type="text" value="April 8,2015 17:29:0" class="set"><a class="beSure">确定</a>
+             <strong>剩余00天00小时00分00</strong><br/>
+             <img src="images/1.jpg"/>
+             <p>商品二</p>
+             <span>抢购价：</span>￥<em>3299.00</em>
+         </li>
+         <li>
+             <input type="text" value="April 8,2015 17:29:10" class="set"><a class="beSure">确定</a>
+             <strong>剩余00天00小时00分00</strong><br/>
+             <img src="images/2.jpg"/>
+             <p>商品三</p>
+             <span>抢购价：</span>￥<em>1.00</em>
+         </li>
+         <li>
+             <input type="text" value="November 27,2015 22:3:0" class="set"><a class="beSure">确定</a>
+             <strong>剩余00天00小时00分00</strong><br/>
+             <img src="images/3.jpg"/>
+             <p>商品四</p>
+             <span>抢购价：</span>￥<em>168.00</em>
+         </li>
+     </ul>
+     <div class="tit"><p>商品名称</p><p>价格</p></div>
+      <ul class="clear" id="list"></ul>
+     <div id="allPrice">总价：<span>0</span>元</div>
+</div>
+</body>
+</html>

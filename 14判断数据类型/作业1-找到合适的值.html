@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+pre{ background:#999; line-height:24px;}
+</style>
+<title>找到合适的值</title>
+</head>
+<body>
+<pre>
+var arr = ['100px', 'abc'-6, [], -98765, 34, -2, 0, '300', , function(){alert(1);}, null, document, [], true, '200px'-30,'23.45元', 5, Number('abc'), function(){ alert(3); }, 'xyz'-90,'结束' ];<br/><br/>
+	1、找到arr里所有的数字：-98765, 34, -2, 0, 5
+	2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5 
+	3、把转成数字以后，最大值判断出来：300
+	4、把 NaN 所在的位置找出来：1 14 17  19
+</pre>
+<div style="text-align:center; font-size:36px;">
+<h5>点击鼠标右键查看源代码</h5>
+</div>
+<script>
+var arr = ['100px', 'abc'-6, [], -98765, 34, -2, 0, '300', , function(){alert(1);}, null, document, [], true, '200px'-30,'23.45元', 5, Number('abc'), function(){ alert(3); }, 'xyz'-90,'结束' ];
+/*var b='100px'+10;
+alert(typeof(b));*/
+/*var c=arr[0];
+alert(parseFloat(c));*/
+/******1、找到arr里所有的数字：-98765, 34, -2, 0, 5******/
+/*for(var i=0;i<arr.length;i++) 
+{
+	var a=arr[i];
+	if(typeof(a)=='number'){
+		if(!isNaN(a))
+		  {
+	        alert(a+":"+typeof(a)+"-------------"+i);
+		  }
+	}
+}*/
+/******2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',5******/
+/*for(var i=0;i<arr.length;i++)
+{
+	var a=arr[i];
+	var b=parseFloat(a);
+	if(typeof(b)=='number')
+	{
+		if(!isNaN(b))
+		  {
+	        alert(b+":"+typeof(b)+"-------------"+i);
+		  }
+     }
+}*/
+/******3、把转成数字以后，最大值判断出来：300******/
+/*var c=[];
+var j=0;
+var Max=0;
+for(var i=0;i<arr.length;i++)
+{
+	var a=arr[i];
+	var b=parseFloat(a);
+	if(typeof(b)=='number')
+	{
+		if(!isNaN(b))
+		  {
+			c[j]=b; 
+			j++; 
+		  }
+     }
+}
+for(var i=0;i<j;i++)
+{
+   Max>c[i]?Max:Max=c[i];  
+}
+alert(Max+":"+typeof(Max)+"-------------"+j);*/
+/******4、把 NaN 所在的位置找出来：1 14 17  19******/
+for(var i=0;i<arr.length;i++)
+{
+	var a=arr[i];
+	if(typeof(a)=='number'){
+		if(isNaN(a))
+		  {
+	         alert(a+":"+typeof(a)+"-----NaN的位置是--------"+i);
+		  }
+	}
+}
+/*后发现以上所有例子中的typeof(a)=='number'判断好像是多余的,因为懒没去验证是不是多余*/
+</script>
+</body>
+</html>

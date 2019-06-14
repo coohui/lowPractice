@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>设置样式</title>
+<style>
+a{ text-decoration:none; color:#000; outline:none;}
+body{padding:0; margin:0;overflow:hidden;height:100%;font-family:"微软雅黑";}
+input{ height:40px; width:120px; background:#F00; border:none; font-weight:bolder; font-size:14px; color:#fff; line-height:40px; outline:none;}
+button{ height:30px; width:80px; background:#000; outline:none; color:#fff; border:none; margin-right:4px; font-size:14px;}
+ul,li ,p{ list-style:none; padding:0; margin:0;}
+#show{ padding:20px 0 0 30px;}
+#box{ width:100px; height:100px; border:4px solid #000;}
+#outer{ height:100%; width:100%; position:absolute; left:0; top:0; background:#000; opacity:0.5;filter:alpha(opacity=50); display:none;}
+#border{position:absolute;left:50%; top:50%; margin:-125px 0 0 -200px; width:400px; height:250px;background:#FCF;opacity:0.3;filter:alpha(opacity=30);display:none;}
+#inner{ background:#fff; margin:20px;width:360px; height:210px;margin:-105px 0 0 -180px;position:absolute;left:50%; top:50%;opacity:1;filter:alpha(opacity=100); z-index:99;zoom: 1;display:none;}
+#inner ul{ padding:20px 0 0 30px;}
+#inner li{ clear:both; padding-top:10px;}
+#inner li a{display:block;float:left; margin-right:4px; line-height:30px; height:30px; width:35px; font-size:12px; text-align:center;cursor:pointer; background:#CCC;border:1px solid #999}
+#inner li a:hover{background:#F93;border:1px solid #000}
+#inner p{ float: left;line-height:30px; height:30px; margin-right:6px;}
+#inner .red{ background:#3f3;font-size:14px;color:#FFF; border:1px solid #69F}
+#inner .yellow{ background:#F90;font-size:14px;color:#FFF; border:1px solid #F90}
+#inner .blue{ background:#69F;font-size:14px;color:#FFF; border:1px solid #69F}
+#inner .red:hover{ background:#f00;border:1px solid #000}
+#inner .yellow:hover{ background:#FF0; color:#000; border:1px solid #000}
+#inner .blue:hover{ background:#00F;border:1px solid #000}
+</style>
+<script>
+window.onload=function(){
+	var oBtn= document.getElementById("btn");
+	var oBtn1= document.getElementById("btn1");
+	var oBtn2= document.getElementById("btn2");
+	var oOuter= document.getElementById("outer");
+	var oBorder= document.getElementById("border");
+	var oInner=document.getElementById("inner");
+	var oBox= document.getElementById("box");
+	var oShow= document.getElementById("show");
+	var oA= document.getElementsByTagName("a");
+	var Attr=["background","background","background","width","width","width","height","height","height"];
+	var Vlaue=["red","yellow","blue","200px","300px","400px","200px","300px","400px"];
+		
+	oBtn.onclick=function(){
+		 oOuter.style.display="block";
+		 oBorder.style.display="block";
+		 oInner.style.display="block";
+		}
+	oBtn2.onclick=function(){
+		 oOuter.style.display="none";
+		 oBorder.style.display="none";
+		 oInner.style.display="none";
+		}
+	var changeStyle=function(obj,attr,value){
+	    obj.style[attr]=value;
+	}
+	oBtn1.onclick=function(){
+        oBox.style.cssText="";
+		}
+    for(var i=0;i<oA.length;i++){
+		oA[i].index=i;
+		oA[i].onclick=function(){
+		changeStyle(oBox,Attr[this.index],Vlaue[this.index]);
+		}
+	}	
+}
+</script>
+</head>
+<body>
+<div id="show">
+<h2>请为下面的DIV设置样式:<input type="button" id="btn" value="点击设置"></h2>
+<div id="box"></div>
+</div>
+<div id="outer"></div>
+     <div id="border"></div>
+      <div id="inner">
+           <ul>
+               <li><p>选择背景色：</p><a class="red" href="javascript::">红</a><a class="yellow" href="javascript::">黄</a><a class="blue" href="javascript::">蓝</a></li>
+               <li><p>选择宽(px)：&nbsp;</p><a href="javascript::">200</a><a href="javascript::">300</a><a href="javascript::">400</a></li>
+               <li><p>选择高(px)：&nbsp;</p><a href="javascript::">200</a><a href="javascript::">300</a><a href="javascript::">400</a></li>
+               <li style="text-align:center; padding-top:20px;"><button id="btn1">恢复</button><button id="btn2">确定</button></li>
+           </ul>
+      </div>
+</body>
+</html>
+<!--总结：1、IE下的hover bug未修复。2、-->

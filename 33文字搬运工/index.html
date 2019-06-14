@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>文字搬运工</title>
+<style>
+body{ padding:100px; font-family:"微软雅黑"; font-size:15px; line-height:23px; color:#333}
+.outer{ width:840px; height:278px; background:url(images/bg.jpg) no-repeat; position:relative;}
+#before{ position:absolute; top:30px; left:30px; width:300px; height:200px; padding:10px 10px; overflow-y:scroll;font-family:"微软雅黑"; font-size:15px; line-height:23px; color:#333; border:none; outline:none;background:#efefd6}
+#after{position:absolute; top:30px; right:32px; width:300px; height:200px; overflow-y:scroll;word-wrap:break-word;overflow-x:auto;padding:10px 10px; background:#63eff7}
+#move{position:absolute; top:30px; left:360px; }
+#move p{width:120px; height:40px; line-height:40px; background:#f76300; color:#fff; text-align:center; margin:0; padding:0; cursor:pointer;}
+#processNum{ text-align:center; padding:12px 0 20px;}
+#processBar{ padding-left:18px; display:none;}
+#processBar span{ display:inline-block; width:8px; height:10px; margin-right:2px; background:#e7ad39;}
+#processBar .active{ background:#ff0808;}
+</style>
+<script>
+window.onload=function(){
+	var oBefore=document.getElementById("before");
+	var oAfter=document.getElementById("after");
+	var oP=document.getElementById("move").getElementsByTagName("p")[0];
+	var aSpan=document.getElementById("processNum").getElementsByTagName("span");
+	var oProcessBar=document.getElementById("processBar");
+	var aSpan2=document.getElementById("processBar").getElementsByTagName("span");
+	var str="";
+	var timer=null;
+	var num=0;
+	var btn=true;
+	
+	oP.onclick=function(){
+	   btn?star():btn;
+	}
+	
+	function star(){
+	  str=oBefore.value;
+      num=str.length;
+	  if(num==0)
+	  {
+		  return false
+	  }
+	  timer=setInterval(function(){
+      aSpan[0].innerHTML=str.length-num;
+	  aSpan[2].innerHTML=num; 
+	  num==0?(clearInterval(timer)):num--;
+	  oBefore.value=str.slice(-num);
+	  oAfter.innerHTML=str.substring(0,str.length-num);
+	  for(var i=0;i<aSpan2.length;i++)
+	  {
+		  aSpan2[i].className=""; 
+	  }
+      aSpan2[(str.length-num)%aSpan2.length].className="active";
+	  if(num==0)
+	  {
+		  oBefore.value="";
+		  oProcessBar.style.display="none";
+		  btn=true;
+	  }else
+	  {
+		   oProcessBar.style.display="block";
+		   btn=false;
+	  }
+	  //console.log(num);
+	  },100)
+	}
+}
+</script>
+</head>
+<body>
+<div class="outer">
+      <textarea id="before" value="">1.小王一出，基本上都会被大王拍死。说明老大在，老二最好不要发话！
+2.没有一张大牌开路，再顺的小牌都出不去。说明领导很重要！
+3.无论你多会记牌、打牌，都抵不过人家手中的一把好牌。说明实力比能力更重要！
+4.如果一堆小牌连不起来，即使拿个双王也未必会赢。说明再牛的领导也需要一个好团队！
+5.必要的时候，即使拆散自己的牌也要送走搭档，说明大局很重要 ！</textarea>
+    <div id="move">
+         <p>把文字右移</p>
+         <div id="processNum"><span>0</span><span>/</span><span>0</span></div>
+         <div id="processBar"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div id="after"></div>
+</div>
+
+</body>
+</html>

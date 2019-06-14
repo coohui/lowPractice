@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>按钮控制商品图片上下滚动</title>
+<style>
+body{ padding:100px;}
+ul,li,img{ margin:0; padding:0; list-style:none; border:none}
+.wrap{width:184px; height:468px; background:url(images/bg.jpg) no-repeat; padding-top:55px; position:relative;}
+.wrap a{ position:absolute; display:block; height:23px; width:165px; left:10px; cursor:default; outline:none;}
+#outer{ margin-left:10px; width:165px; height:380px; overflow:hidden; position:relative;}
+#inner{position:absolute; top:0px; left:0; height:680px;}
+#up{ top:32px;}
+#down{top:435px;}
+</style>
+<script>
+window.onload=function(){
+	var oOuter=document.getElementById("outer");
+	var oInner= document.getElementById("inner");
+	var oUp= document.getElementById("up");
+	var oDown=document.getElementById("down");
+	var outerHeight=parseInt(getStyle(oOuter,"height"));
+	var innerHeight=parseInt(getStyle(oInner,"height"));
+	var speed=1;
+	var timer=null;
+	
+	function getStyle(obj,attr){
+	    return  obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr];  //IE不能获取到未定义的高度，所以inner必须加一个高(height:680px)，否则不兼容IE,也许还有其他方法解决此问题，本人尚未发现。
+	}
+
+	oUp.onmousedown=function(){
+		timer=setInterval(function(){
+			var oTop=parseInt(getStyle(oInner,"top"));
+			if(oTop>outerHeight-innerHeight)
+			{
+			   oInner.style.top=parseInt(oTop)+(-speed)+"px";
+			}else
+			{
+				oTop=outerHeight;
+				clearInterval(timer);
+			}
+		},20);
+	}
+
+	oDown.onmousedown=function(){
+	    timer=setInterval(function(){
+			var oTop=parseInt(getStyle(oInner,"top"));
+			if(oTop<0)
+			{
+			   oInner.style.top=parseInt(oTop)+speed+"px";
+			}else
+			{
+				oTop=0;
+				clearInterval(timer);
+			}
+		},20);
+	}
+	
+	oUp.onmouseup=oDown.onmouseup=function(){
+		clearInterval(timer);
+	}
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+    <div id="outer">
+         <div id="inner"><img src="images/innerBg.jpg"/></div>
+    </div>
+    <a id="up"></a>
+    <a id="down"></a>
+</div>
+</body>
+</html>
